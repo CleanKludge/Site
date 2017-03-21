@@ -1,0 +1,377 @@
+﻿* {
+    font-family: 'Open Sans', sans-serif;
+    font-family: inherit;
+    margin: 0;
+    padding: 0;
+    color: #848484;
+}
+
+.row-nested {
+    .transparent;
+    .no-padding;
+}
+
+.no-padding {
+    padding: 0px;
+}
+
+.transparent {
+    background-color: transparent;
+}
+
+html, body, .container-fluid {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+main {
+    padding-top: 50px;
+    margin-top:5px;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    font-size: 15px;
+    font-weight: 400;
+    background-color: #f5f5f5;
+    padding-bottom: 190px;
+}
+
+.row {
+    margin-right: 0 !important;
+    margin-left:  0 !important;
+    margin-bottom: 5px !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	letter-spacing: 4px;
+	text-align: center;
+	margin: 5px 0;
+	overflow: hidden;
+}
+	
+h1 {
+	font-size: 1.8em;
+	line-height: 1.4em;
+}
+
+h2, h3 {
+    font-size: 1.4em;
+    line-height: 1.4em;
+}
+	
+p {
+	color: #848484;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	cursor: pointer;
+	display: block;
+	font-weight: 400;
+}
+
+.strikethrough {
+    text-decoration: line-through;
+}
+
+.content {
+    padding: 20px 20px 15px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+}
+
+article > div {
+    .content;
+}
+
+article > div > p {
+    white-space:pre-wrap;
+}
+
+article a {
+	color: #848484;
+}
+
+article a:hover {
+    text-decoration: none;
+}
+
+article .clickable:hover {
+    font-weight:bold;
+}
+
+.navbar {
+    padding-bottom: 0.4em;
+	letter-spacing: 4px;
+	font-weight: 500;
+}
+	
+nav a, nav button {
+	color: #848484;
+}
+
+footer  {
+   text-align: center;
+   padding-top: 20px;
+   position:absolute;
+   bottom:0;
+   width: 100%;
+}
+
+footer .navbar-nav {  
+    display: inline-block  !important;
+    float: none !important;
+}
+
+footer .navbar-nav > li {  
+    display: inline-block  !important;
+    float: none !important;
+}
+	
+footer .navbar-nav a { 
+	color: #848484;
+}
+
+ul.nav li a:hover, ul.nav li button:hover {
+    background-color: #000;
+}
+
+.navbar-btn {
+    border: none;
+    border-radius: 0;
+    background: none;
+    margin: 0;
+    width: 100%;
+    text-align: left;
+    padding: 10px 15px;
+    letter-spacing: 4px;
+}
+
+ul.nav > li.menu-item.active a {
+	color:#f2f2f2;
+}
+
+ul.nav > li.menu-item.active a:hover {
+	color:#f2f2f2;
+}
+
+.bold {
+    font-weight: 800;
+}
+
+.background-highlight {
+	color: #f2f2f2;
+}
+
+.background-highlight2 {
+	color: #f2f2f2;
+    width: 100%;
+    padding: 0;
+}
+
+.background-header {
+	background: #121212;
+	color: #f2f2f2;
+}
+
+.italics {
+    font-style: italic;
+}
+
+.post-info {
+    text-align: right;
+}
+
+.contact-message {
+    height: 219px !important;
+    resize: none;
+}
+
+.btn-group {
+      font-size: 1em;
+      line-height: 1em;
+      letter-spacing: 4px;
+      text-align: center;
+      text-transform: uppercase;
+      padding: 0.9em 10px 0.8em 10px;
+      overflow: hidden;
+}
+
+.btn.active {
+    color: #ffffff;
+}
+
+.btn:hover {
+    color: #848484;
+}
+
+.btn.active:hover {
+    color: #ffffff;
+}
+
+.floating-right {
+    position: absolute;
+    right: -40px;
+    top: 0;
+}
+
+.inline {
+    display: inline;
+}
+
+.align-left {
+    text-align: left;
+}
+
+@media screen and (min-width: 768px) {
+    .navbar-right > li {
+        margin-right:10px;
+    }
+
+    .navbar-btn {
+        padding-top: 15px;
+        padding-bottom: 14px;
+    }
+
+    .equal, .equal > div[class*='col-'] {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        flex: 1 0 auto;
+    }
+
+    .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,
+    .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2,
+    .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3,
+    .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4,
+    .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5,
+    .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6,
+    .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7,
+    .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8,
+    .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9,
+    .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10,
+    .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11,
+    .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12
+    {
+        padding-right: 0px;
+        padding-left: 15px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .row > div {
+        margin-bottom: 5px;
+    }
+
+    .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,
+    .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2,
+    .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3,
+    .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4,
+    .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5,
+    .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6,
+    .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7,
+    .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8,
+    .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9,
+    .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10,
+    .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11,
+    .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .col-xs-1 div, .col-sm-1 div, .col-md-1 div, .col-lg-1 div,
+    .col-xs-2 div, .col-sm-2 div, .col-md-2 div, .col-lg-2 div,
+    .col-xs-3 div, .col-sm-3 div, .col-md-3 div, .col-lg-3 div,
+    .col-xs-4 div, .col-sm-4 div, .col-md-4 div, .col-lg-4 div,
+    .col-xs-5 div, .col-sm-5 div, .col-md-5 div, .col-lg-5 div,
+    .col-xs-6 div, .col-sm-6 div, .col-md-6 div, .col-lg-6 div,
+    .col-xs-7 div, .col-sm-7 div, .col-md-7 div, .col-lg-7 div,
+    .col-xs-8 div, .col-sm-8 div, .col-md-8 div, .col-lg-8 div,
+    .col-xs-9 div, .col-sm-9 div, .col-md-9 div, .col-lg-9 div,
+    .col-xs-10 div, .col-sm-10 div, .col-md-10 div, .col-lg-10 div,
+    .col-xs-11 div, .col-sm-11 div, .col-md-11 div, .col-lg-11 div,
+    .col-xs-12 div, .col-sm-12 div, .col-md-12 div, .col-lg-12 div {
+        padding-right: 0px;
+        padding-left: 15px;
+    }
+}
+
+article div ul {
+    margin-left: 23px;
+    list-style:disc;
+}
+
+.editor-field {
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    letter-spacing: 4px;
+}
+
+.editor-area {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    resize:none;
+}
+
+.background-highlight input, .background-highlight2 input {
+    color: #f2f2f2;
+}
+
+.editor-section-controls {
+    text-align:right;
+}
+
+.editor-section {
+    padding:0 !important;
+}
+
+.editor-section-row {
+    margin-bottom: 5px;
+}
+
+section .labels {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    background: none;
+}
+
+.center {
+    text-align: center;
+}
+
+.editor-labels {
+    margin-left: 5px;
+    width: 70px;
+}
+
+.navbar-right {
+    margin-right: -10px;
+}
+
+.editor-label {
+    margin-right: 5px;
+}
+
+.editor-label:hover {
+    cursor: pointer;
+    background-color: #848484;
+}

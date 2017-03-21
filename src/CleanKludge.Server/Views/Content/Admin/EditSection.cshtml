@@ -1,0 +1,16 @@
+﻿@using CleanKludge.Api.Responses
+@using CleanKludge.Api.Responses.Articles
+@model CleanKludge.Api.Responses.Articles.ArticleSection
+
+@switch (Model.Type)
+{
+    case SectionType.Code:
+        Html.RenderPartial("Admin/Partials/CodeEdit", Model);
+        break;
+    case SectionType.Title:
+        Html.RenderPartial("Admin/Partials/TitleEdit", Model);
+        break;
+    case SectionType.Text:
+        Html.RenderPartial("Admin/Partials/TextEdit", Model);
+        break;
+}

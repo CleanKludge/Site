@@ -1,0 +1,55 @@
+﻿ul.nav > li.menu-item.active a {
+	background-color:@color;
+}
+
+ul.nav > li.menu-item a:hover, ul.nav > li.menu-item button:hover {
+    color: @color;
+}
+
+.navbar-brand {
+	color:@color;
+}
+	
+.navbar-brand:hover {
+	color: @color;
+}
+
+.background-highlight {
+	background-color: @color;		
+}	
+		
+.background-highlight2 {
+	background-color: @color;	
+}
+
+.icon-bar {
+	background-color: @color !important;
+}
+
+.btn.active {
+    background-color: @color;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: @color;
+    border-color: @color;
+}
+
+.btn-info:hover {
+    color: #fff;
+    background-color: @color-highlight;
+    border-color: @color-highlight;
+}
+
+.list li a:hover {
+    color: @color;
+}
+
+.editor-template {
+    display: none;
+}
+
+.label-default {
+    background-color: @color;
+}

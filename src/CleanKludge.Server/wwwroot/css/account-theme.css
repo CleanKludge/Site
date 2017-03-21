@@ -1,0 +1,44 @@
+ul.nav > li.menu-item.active a {
+  background-color: #8e44ad;
+}
+ul.nav > li.menu-item a:hover,
+ul.nav > li.menu-item button:hover {
+  color: #8e44ad;
+}
+.navbar-brand {
+  color: #8e44ad;
+}
+.navbar-brand:hover {
+  color: #8e44ad;
+}
+.background-highlight {
+  background-color: #8e44ad;
+}
+.background-highlight2 {
+  background-color: #8e44ad;
+}
+.icon-bar {
+  background-color: #8e44ad !important;
+}
+.btn.active {
+  background-color: #8e44ad;
+}
+.btn-info {
+  color: #fff;
+  background-color: #8e44ad;
+  border-color: #8e44ad;
+}
+.btn-info:hover {
+  color: #fff;
+  background-color: #9b59b6;
+  border-color: #9b59b6;
+}
+.list li a:hover {
+  color: #8e44ad;
+}
+.editor-template {
+  display: none;
+}
+.label-default {
+  background-color: #8e44ad;
+}

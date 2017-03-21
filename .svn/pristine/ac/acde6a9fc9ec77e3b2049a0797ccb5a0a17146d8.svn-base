@@ -1,0 +1,82 @@
+﻿@using CleanKludge.Api.Responses
+@using CleanKludge.Api.Responses.Articles
+@using Microsoft.AspNetCore.Http.Extensions
+@model CleanKludge.Api.Responses.Articles.ContentArticle
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.Description = Model.Summary;
+    ViewBag.Keywords = string.Join(",", Model.Tags);
+}
+
+@section scripts
+{
+    <script>
+        var disqus_config = function () {
+            this.page.url = '@Context.Request.GetDisplayUrl()';
+            this.page.identifier = '@Model.Identifier';
+            this.page.title = '@Model.Title'; 
+        };
+    
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//cleankludge.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+}
+
+<section>
+    <article>
+        <h1 class="background-highlight2">@Model.Title</h1>
+        <div class="labels">
+            @foreach(var tag in Model.Tags)
+            {
+                <span class="label label-default">@tag</span>
+            }
+        </div>
+        <h2>By @Model.Author on @Model.Created.ToString("dd/MM/yyyy")</h2>
+        <article class="container">
+            @foreach (var section in Model.Sections)
+            {
+                switch (section.Type)
+                {
+                    case SectionType.Title:
+                        Html.RenderPartial("Sections/Title", section);
+                        break;
+                    case SectionType.Code:
+                        Html.RenderPartial("Sections/Code", section);
+                        break;
+                    case SectionType.Text:
+                        Html.RenderPartial("Sections/Text", section);
+                        break;
+                }
+            }
+        </article>
+
+        <h2>Comments</h2>
+        <article class="container">
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </article>
+    </article>
+</section>
+
+@if (ViewBag.IsSignedIn)
+{
+    <section id="controls">
+        <article class="container text-center">
+            <h2 class="background-highlight">Controls</h2>
+            <ul class="list-inline">
+                <li>
+                    <a class="btn btn-info" asp-area="" asp-controller="Content" asp-action="Edit" asp-all-route-data='@(new Dictionary<string, string> { { "reference", Model.Identifier.ToLower() }, { nameof(Location).ToLower(), Model.Location.ToString().ToLower() } })' role="button">Edit</a>
+                </li>
+                <li>
+                    <form Method="post" asp-area="" asp-controller="Content" asp-action="Delete" asp-all-route-data='@(new Dictionary<string, string> { { "reference", Model.Identifier.ToLower() }, { nameof(Location).ToLower(), Model.Location.ToString().ToLower() } })'>
+                        <button id="edit" type="submit" class="btn btn-info">Delete</button>
+                    </form>
+                </li>
+            </ul>
+        </article>
+    </section>
+}

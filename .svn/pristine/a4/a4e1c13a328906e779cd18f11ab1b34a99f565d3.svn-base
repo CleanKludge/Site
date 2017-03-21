@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Description = "About Clean Kludge";
+    ViewBag.Keywords = "CleanKludge";
+}
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('button', '.center', '#contact-content').click(function () {
+                $.get('@Url.Action("Contact")', function (data) {
+                    $('#contact-content').html(data);
+                });
+            });
+        });
+    </script>
+}
+
+<section>
+    <article>
+        <h1 class="background-highlight2">About me</h1>
+        <article class="container">
+            <div class="row row-nested equal">
+                <div class="col-sm-9 content">
+                    Stephen Phillips is a server-side enginer based in Brighton, U.K., with over five years industry experience working with C# within an agile environment. He holds a first class honours degree from Staffordshire University in Computer Games Programming. Stephen has a passion for clean code and agile practices all wrapped up in neat software architectures. When not tinkering with code, he likes fencing and Airsofting.
+                </div>
+                <img class="col-sm-3" src="~/images/author.jpg" alt="Picture of the author" style="width: 176px; height: 176px" />
+            </div>
+            <h2 class="background-highlight row">Contact Details</h2>
+            <article id="contact-content" class="row">
+                <div class="center">
+                    <button class="btn btn-primary">Show</button>
+                </div>
+            </article>
+        </article>
+    </article>
+</section>

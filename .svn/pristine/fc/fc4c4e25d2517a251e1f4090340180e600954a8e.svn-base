@@ -1,0 +1,7 @@
+﻿tools/*
+src/*
+tests/*
+.vs*
+*.ps1
+*.cake
+*.sln

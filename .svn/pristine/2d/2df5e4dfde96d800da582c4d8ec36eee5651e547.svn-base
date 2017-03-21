@@ -1,0 +1,27 @@
+{
+    "enabled": false,
+    "identifier": "test3",
+    "created": "2016-12-23T12:53Z",
+    "description": "hello world3",
+    "author": "Steve3",
+    "tags": [ "test", "post" ],
+    "title": "This is the title",
+    "location": "Blog",
+    "sections": [
+        {
+            "type": "Text",
+            "content": "this *is* **content**!"
+        },
+        {
+            "type": "Title",
+            "content": "Sub title here"
+        },
+        {
+            "type": "Code",
+            "properties": {
+                "language": "csharp"
+            },
+            "content": "using system;\n\nnamespace CleanKludge.Core\n{\n}\n"
+        }
+    ]
+}

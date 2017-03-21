@@ -1,0 +1,141 @@
+﻿@using CleanKludge.Api.Responses
+@using CleanKludge.Api.Responses.Articles
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Stephen Phillips">
+    <meta name="msapplication-TileColor" content="#141414">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    <meta name="theme-color" content="#141414">
+
+    @if (ViewBag.Title != null)
+    {
+        <title>@ViewBag.Title - @ViewData[nameof(Location)] - CleanKludge</title>
+    }
+    else
+    {
+        <title>@ViewData[nameof(Location)] - CleanKludge</title>
+    }
+
+    @if (ViewBag.Description != null)
+    {
+        <meta name="description" content="@ViewBag.Description">
+    }
+    else
+    {
+        <meta name="description" content="CleanKludge is a website created by Stephen Phillips in order to have somewhere to dump all of his coding thoughts.">
+    }
+
+    @if (ViewBag.Keywords != null)
+    {
+        <meta name="keywords" content="@ViewBag.Keywords,@ViewData[nameof(Location)]">
+    }
+    else
+    {
+        <meta name="keywords" content="Clean,Code,Kludge,@ViewData[nameof(Location)]">
+    }
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/rainbow/themes/css/rainbow.css" />
+        <link rel="stylesheet" href="~/lib/fontawesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/@(ViewData[nameof(Location)])-theme.css" />
+    </environment>
+    <environment names="Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"/>
+        <link rel="stylesheet" href="~/lib/rainbow/themes/css/rainbow.css" />
+        <link rel="stylesheet" href="~/lib/fontawesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true"/>
+        <link rel="stylesheet" href="~/css/@(ViewData[nameof(Location)])-theme.min.css" asp-append-version="true"/>
+    </environment>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="~/favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="~/favicons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="~/favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/favicons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/favicons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="~/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="~/favicons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="~/favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="~/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="~/favicons/manifest.json">
+</head>
+<body>
+<nav class="navbar navbar-fixed-top background-highlight">
+    <div class="background-header">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index"><span class="bold">Clean</span>Kludge</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="menu-item @((Location)ViewData[nameof(Location)] == Location.Home ? "active" : "")"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="menu-item @((Location)ViewData[nameof(Location)] == Location.Experiments ? "active" : "")"><a asp-controller="Content" asp-action="Posts" asp-all-route-data="@(new Dictionary<string, string> { { nameof(Location).ToLower(), Location.Experiments.ToString().ToLower() } })">Experiments</a></li>
+                <li class="menu-item @((Location)ViewData[nameof(Location)] == Location.Blog ? "active" : "")"><a asp-controller="Content" asp-action="Posts" asp-all-route-data="@(new Dictionary<string, string> { { nameof(Location).ToLower(), Location.Blog.ToString().ToLower() } })">Blog</a></li>
+                <li class="menu-item @((Location)ViewData[nameof(Location)] == Location.About ? "active" : "")"><a asp-controller="About" asp-action="Index">About</a></li>
+            </ul>
+            @await Html.PartialAsync("_LoginPartial")
+        </div>
+    </div>
+</nav>
+<main class="container-fluid">
+    @RenderBody()
+</main>
+<footer class="background-header container-fluid">
+        <div class="row">
+            <ul>
+                <li> © 2014 - @(DateTime.Now.Year) Stephen Phillips</li>
+            </ul>
+        </div>
+        <div class="row">
+            <ul>
+                <li>Current build: v@(ViewBag.Version)</li>
+                <li>Powered by AspNetCore</li>
+            </ul>
+        </div>
+        <div class="row">
+            <ul class="nav navbar-nav">
+                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li><a asp-controller="Content" asp-action="Posts" asp-all-route-data="@(new Dictionary<string, string> { { nameof(Location).ToLower(), Location.Experiments.ToString().ToLower() } })">Experiments</a></li>
+                <li><a asp-controller="Content" asp-action="Posts" asp-all-route-data="@(new Dictionary<string, string> { { nameof(Location).ToLower(), Location.Blog.ToString().ToLower() } })">Blog</a></li>
+                <li><a asp-controller="About" asp-action="Index">About</a></li>
+            </ul>
+        </div>
+</footer>
+<environment names="Development">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/rainbow/dist/rainbow.min.js"></script>
+    <script src="~/lib/rainbow/src/language/csharp.js"></script>
+</environment>
+<environment names="Production">
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery">
+    </script>
+    <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
+            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+    </script>
+    <script src="~/lib/rainbow/dist/rainbow.min.js"></script>
+    <script src="~/lib/rainbow/src/language/csharp.js"></script>
+</environment>
+
+@RenderSection("scripts", false)
+</body>
+</html>

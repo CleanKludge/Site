@@ -1,0 +1,276 @@
+﻿@using CleanKludge.Api.Responses
+@using CleanKludge.Api.Responses.Articles
+@model ContentArticle
+@{
+    ViewBag.Description = $"Edit {Model.Location}";
+    ViewBag.Keywords = $"Edit,{Model.Location}";
+}
+
+@section scripts
+{
+    <script type="text/javascript" src="~/lib/autosize/dist/autosize.min.js"></script>
+    <script type="text/javascript">
+        var titleBlock = "";
+
+        function resizeInput() {
+            $(this).attr('size', $(this).val().length * 2);
+        }
+
+        function buildSection(element) {
+            var section = {
+                Type: element.data("section-type"),
+                Properties: {}
+            }
+
+            switch (section.Type) {
+                case "Code":
+                    section.Content = $("textarea", element).val();
+                    section.Properties.language = $("select", element).val();
+                    break;
+                case "Text":
+                    section.Content = $("textarea", element).val();
+                    break;
+                case "Title":
+                    section.Content = $("input", element).val();
+                    break;
+            }
+
+            return section;
+        }
+
+        $(document).ready(function() {
+            $('.editor-field')
+                .keyup(resizeInput)
+                .each(resizeInput);
+
+            $("#add-label").keypress(function(e) {
+                if (e.which == 13) {
+                    $('<span/>',
+                        {
+                            text: $(this).val(),
+                            "class": "label label-default editor-label",
+                            click: function() {
+                                $(this).remove();
+                            }
+                        })
+                        .insertBefore("#add-label");
+                    $(this).val('');
+                    return false;
+                }
+            });
+
+            $('.editor-label').click(function () {
+                $(this).remove();
+            });
+
+            $('body').on('click', "button.fa-arrow-up", function() {
+                var parent = $(this).closest("section");
+                parent.insertBefore(parent.prev());
+            });
+
+            $('body').on('click', "button.fa-arrow-down", function() {
+                var parent = $(this).closest("section");
+                parent.insertAfter(parent.next());
+            });
+
+            $('body').on('click', "button.fa-times", function() {
+                var parent = $(this).closest("section");
+                parent.remove();
+            });
+
+            $('body').on('click', "button.edit-section", function() {
+                var parent = $(this).closest("section");
+                parent.find('.preview-row').hide();
+                parent.find('button.edit-section').hide();
+                parent.find('button.preview-section').show();
+                parent.find('.section-content').show();
+            });
+
+            $('body').on('click', "button.preview-section", function() {
+                var parent = $(this).closest("section");
+
+                var section = buildSection(parent);
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("PreviewSection", new { area = Model.Location, reference = Model.Identifier })',
+                    contentType: 'application/json',
+                    data: JSON.stringify(section)
+                }).done(function (response) {
+                    parent.find('.preview-row').html(response);
+
+                    if (section.Type === "Code") {
+                        console.log(response);
+                        Rainbow.color(parent.find('preview-code'), section.Properties.language, function (highlightedCode) {
+                            console.log(highlightedCode);
+                        });
+                    }
+
+                    parent.find('.section-content').hide();
+                    parent.find('button.preview-section').hide();
+                    parent.find('button.edit-section').show();
+                    parent.find('.preview-row').show();
+                });
+            });
+
+            $("#add-title").click(function() {
+                var template = $("#title-template")
+                    .clone(true)
+                    .show()
+                    .contents();
+
+                $(template).insertBefore("#controls");
+
+                $('.editor-field')
+                    .keyup(resizeInput)
+                    .each(resizeInput);
+            });
+
+            $("#add-text").click(function() {
+                var template = $("#text-template")
+                    .clone(true)
+                    .show()
+                    .contents();
+
+                $(template).insertBefore("#controls");
+                autosize($('.editor-area'));
+            });
+
+            $("#add-code").click(function() {
+                var template = $("#code-template")
+                    .clone(true)
+                    .show()
+                    .contents();
+
+                $(template).insertBefore("#controls");
+                autosize($('.editor-area'));
+            });
+
+            $("#save").click(function() {
+                var article = {};
+
+                article.Enabled = $('#article-enabled').is(":checked");
+                article.Created = $('#article-created').val();
+                article.Author = $('#article-author').val();
+                article.Title = $('#article-title').val();
+                article.Identifier = $('#article-identifier').val();
+                article.Summary = $('#article-description').val();
+                article.Section = $('#article-section').val();
+                article.Tags = [];
+                article.Sections = [];
+
+                $('.editor-label', '.labels').each(function() {
+                    article.Tags.push($(this).text());
+                });
+
+                $(".container .section").each(function() {
+                    var section = {
+                        Type: $(this).data("section-type"),
+                        Properties: {}
+                    }
+
+                    switch (section.type) {
+                    case "Code":
+                        section.Content = $("textarea", this).val();
+                        section.Properties.language = $("select", this).val();
+                        break;
+                    case "Text":
+                        section.Content = $("textarea", this).val();
+                        break;
+                    case "Title":
+                        section.Content = $("input", this).val();
+                        break;
+                    }
+
+                    article.Sections.push(section);
+                });
+
+                console.log(article);
+            });
+
+            autosize($('.editor-area'));
+        });
+    </script>
+}
+
+<section>
+    <article>
+        <h1 class="background-highlight2"><input type="text" id="article-title" class="editor-field" value="@Model.Title" /></h1>
+        <div class="labels">
+            @foreach (var tag in Model.Tags)
+            {
+                <span class="label label-default editor-label">@tag</span>
+            }
+            <input id="add-label" class="editor-labels" type="text" placeholder="Add tag"/>
+        </div>
+        <h3>By <input type="text" id="article-author" class="editor-field" value="@Model.Author" /> on <input type="text" id="article-created" class="editor-field" value="@Model.Created.Date.ToString("dd/MM/yyyy")" /></h3>
+        <article class="container">
+            @foreach (var section in Model.Sections)
+            {
+                Html.RenderPartial("Admin/EditSection", section);
+            }
+
+            @if (ViewBag.IsSignedIn)
+            {
+                <section id="controls">
+                    <article class="text-center">
+                        <h2 class="background-highlight">Controls</h2>
+                        <button id="add-title" type="button" class="btn btn-info">Add Title</button>
+                        <button id="add-text" type="button" class="btn btn-info">Add Text</button>
+                        <button id="add-code" type="button" class="btn btn-info">Add Code</button>
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#articleDetails">
+                            Save
+                        </button>
+                    </article>
+                </section>
+            }
+        </article>
+    </article>
+</section>
+
+<section id="title-template" class="editor-template">
+    @{ Html.RenderPartial("Admin/Partials/TitleEdit", new ArticleSection()); }
+</section>
+
+<section id="text-template" class="editor-template">
+    @{ Html.RenderPartial("Admin/Partials/TextEdit", new ArticleSection()); }
+</section>
+
+<section id="code-template" class="editor-template">
+    @{ Html.RenderPartial("Admin/Partials/CodeEdit", new ArticleSection()); }
+</section>
+
+<div id="articleDetails" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Article Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="article-identifier">Identifier</label>
+                    <input id="article-identifier" type="text" class="form-control" value="@Model.Identifier"/>
+                </div>
+                <div class="form-group">
+                    <label for="article-description">Description</label>
+                    <input id="article-description" type="text" class="form-control" value="@Model.Summary"/>
+                </div>
+                <div class="form-group">
+                    <label for="article-description">Section</label>
+                    @Html.DropDownList("article-section", new[] { new SelectListItem { Text = $"{Location.Blog}", Value = $"{Location.Blog}", Selected = Model.Location == Location.Blog }, new SelectListItem { Text = $"{Location.Experiments}", Value = $"{Location.Experiments}", Selected = Model.Location == Location.Experiments } }, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <label>
+                        <input id="article-enabled" type="checkbox" @(Model.Enabled ? "checked='checked'" : "")> Enabled
+                    </label>
+                </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="save" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+﻿@using CleanKludge.Api.Responses.Articles
+@using Markdig
+@model CleanKludge.Api.Responses.Articles.ArticleSection
+
+<div>
+    <p>@Html.Raw(Markdown.ToHtml(Model.Content, new MarkdownPipelineBuilder().UseAdvancedExtensions().Build()))</p>
+</div>
