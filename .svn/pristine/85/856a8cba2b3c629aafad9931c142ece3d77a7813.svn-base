@@ -1,6 +1,0 @@
-﻿@using CleanKludge.Api.Responses.Articles
-@model CleanKludge.Api.Responses.Articles.ArticleSection
-
-<div class="col-xs-12 editor-section">
-    <pre><code class="preview-code" data-language="@Model.Properties["language"]">@Model.Content</code></pre>
-</div>

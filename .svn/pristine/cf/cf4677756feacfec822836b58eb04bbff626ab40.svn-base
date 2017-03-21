@@ -1,4 +1,0 @@
-﻿@color: #c0392b;
-@color-highlight: #e74c3c;
-
-@import "base-theme.less";
