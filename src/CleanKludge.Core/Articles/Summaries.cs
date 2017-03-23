@@ -38,9 +38,9 @@ namespace CleanKludge.Core.Articles
             return GroupedSummaries.From(_articles, grouping);
         }
 
-        public ContentSummaries ToResponse()
+        public SummariesResponse ToResponse()
         {
-            return new ContentSummaries
+            return new SummariesResponse
             {
                 Summaries = _articles.Select(x => x.ToResponse()).ToList()
             };

@@ -32,7 +32,7 @@ namespace CleanKludge.Core.Articles
             _grouping = grouping;
         }
 
-        public GroupedContentSummaries ToResponse()
+        public GroupedSummariesResponse ToResponse()
         {
             var columns = new List<Dictionary<string, List<SummaryResponse>>>();
             foreach (var group in _articles)
@@ -43,7 +43,7 @@ namespace CleanKludge.Core.Articles
                 columns.Last().Add(group.Key, group.Value.Select(x => x.ToResponse()).ToList());
             }
 
-            return new GroupedContentSummaries
+            return new GroupedSummariesResponse
             {
                 GroupedBy = _grouping.ToGroupedBy(),
                 Groups = columns
