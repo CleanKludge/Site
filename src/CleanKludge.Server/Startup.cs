@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using CleanKludge.Data.File.Modules;
-using CleanKludge.Server.Authentication.Filters;
-using CleanKludge.Server.Authentication.Modules;
 using CleanKludge.Services.Modules;
 using LightInject;
 using LightInject.Microsoft.DependencyInjection;
@@ -48,8 +46,7 @@ namespace CleanKludge.Server
             services.AddOptions();
             services.AddFileServices(Configuration);
             services.AddSevices(Configuration);
-            services.AddUserAuthentication();
-            services.AddMvc(c => c.Filters.Add(typeof(AuthenticationAttribute)));
+            services.AddMvc();
 
             return new ServiceContainer()
                 .CreateServiceProvider(services);
@@ -62,7 +59,6 @@ namespace CleanKludge.Server
 
             applicationBuilder.UseStatusCodePagesWithRedirects("/error/{0}");
             applicationBuilder.UseStaticFiles();
-            applicationBuilder.AddUserAuthentication();
             applicationBuilder.UseMvc();
         }
     }

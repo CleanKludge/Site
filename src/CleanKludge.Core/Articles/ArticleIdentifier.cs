@@ -2,6 +2,7 @@
 {
     public class ArticleIdentifier
     {
+        public static ArticleIdentifier None => new ArticleIdentifier(string.Empty);
         private readonly string _identifier;
 
         public static ArticleIdentifier From(string identifier)

@@ -67,6 +67,11 @@
     <None Remove="logs\**" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Authentication\Stores\" />
+    <Content Include="wwwroot\articles\content\test-disabled.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\articles\content\test.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 </Project>

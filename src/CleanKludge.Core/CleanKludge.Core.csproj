@@ -10,19 +10,19 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Authentication.Cookies">
-      <HintPath>..\..\..\..\..\..\.nuget\packages\microsoft.aspnetcore.authentication.cookies\1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.Authentication.Cookies.dll</HintPath>
+      <HintPath>C:\Users\Korthax\.nuget\packages\microsoft.aspnetcore.authentication.cookies\1.1.1\lib\netstandard1.3\Microsoft.AspNetCore.Authentication.Cookies.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation">
       <HintPath>..\..\..\..\..\..\.nuget\packages\microsoft.aspnetcore.cryptography.keyderivation\1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Identity">
-      <HintPath>..\..\..\..\..\..\.nuget\packages\microsoft.aspnetcore.identity\1.1.0\lib\netstandard1.3\Microsoft.AspNetCore.Identity.dll</HintPath>
+      <HintPath>C:\Users\Korthax\.nuget\packages\microsoft.aspnetcore.identity\1.1.1\lib\netstandard1.3\Microsoft.AspNetCore.Identity.dll</HintPath>
     </Reference>
     <Reference Include="System.Security.Claims">
-      <HintPath>..\..\..\..\..\..\.nuget\packages\system.security.claims\4.3.0\ref\netstandard1.3\System.Security.Claims.dll</HintPath>
+      <HintPath>C:\Users\Korthax\.nuget\packages\system.security.claims\4.3.0\ref\netstandard1.3\System.Security.Claims.dll</HintPath>
     </Reference>
     <Reference Include="System.Security.Principal">
-      <HintPath>..\..\..\..\..\..\.nuget\packages\system.security.principal\4.3.0\ref\netstandard1.0\System.Security.Principal.dll</HintPath>
+      <HintPath>C:\Users\Korthax\.nuget\packages\system.security.principal\4.3.0\ref\netstandard1.0\System.Security.Principal.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

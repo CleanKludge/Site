@@ -4,6 +4,6 @@ namespace CleanKludge.Api.Responses.Articles
 {
     public class ContentSummaries
     {
-        public List<ContentSummary> Summaries { get; set; }
+        public List<SummaryResponse> Summaries { get; set; }
     }
 }

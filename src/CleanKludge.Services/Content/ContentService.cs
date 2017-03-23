@@ -4,40 +4,31 @@ namespace CleanKludge.Services.Content
 {
     public class ContentService
     {
-        private readonly IArticleRepository _contentRepository;
+        private readonly IArticleSummaryRepository _articleSummaryRepository;
+        private readonly IArticleRepository _articleRepository;
 
-        public ContentService(IArticleRepository contentRepository)
+        public ContentService(IArticleSummaryRepository articleSummaryRepository, IArticleRepository articleRepository)
         {
-            _contentRepository = contentRepository;
+            _articleSummaryRepository = articleSummaryRepository;
+            _articleRepository = articleRepository;
         }
 
-        public Articles Latest(bool onlyEnabled)
+        public Summaries Latest()
         {
-            return Articles.AllFrom(_contentRepository, onlyEnabled)
+            return Summaries.AllFrom(_articleSummaryRepository)
                 .GetLatest(5);
         }
 
-        public GroupedArticles Grouped(Grouping grouping, Location location, bool includeDisabled)
+        public GroupedSummaries Grouped(Grouping grouping, Location location)
         {
-            return Articles.AllFrom(_contentRepository, includeDisabled)
+            return Summaries.AllFrom(_articleSummaryRepository)
                 .ForSection(location)
                 .GroupBy(grouping);
         }
 
-        public Article For(ArticleIdentifier reference, Location location, bool includeDisabled)
+        public Article For(ArticleIdentifier reference)
         {
-            var articleDto = _contentRepository.FetchOne(reference, includeDisabled);
-            return Article.From(articleDto);
-        }
-
-        public void Delete(ArticleIdentifier reference)
-        {
-            _contentRepository.Delete(reference);
-        }
-
-        public void Save(Article article)
-        {
-            article.Save(_contentRepository);
+            return Article.LoadFrom(_articleRepository, reference);
         }
     }
 }

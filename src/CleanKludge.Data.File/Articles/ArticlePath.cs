@@ -8,36 +8,43 @@ namespace CleanKludge.Data.File.Articles
 {
     public class ArticlePath
     {
+        private readonly string _extension;
         private readonly string _path;
 
-        public static ArticlePath From(IConfigurationRoot configuration)
+        public static ArticlePath ForSummaries(IConfigurationRoot configuration)
         {
-            var path = Path.Combine(configuration["BasePath"], configuration["ArticlesPath"]);
+            var contentPath = Path.Combine(configuration["BasePath"], configuration["ArticleSummaryPath"]);
 
-            if (!Directory.Exists(path))
-                throw ExceptionBecause.InvalidArticlePath(path);
+            if (!Directory.Exists(contentPath))
+                throw ExceptionBecause.InvalidArticlePath(contentPath);
 
-            return new ArticlePath(path);
+            return new ArticlePath(contentPath, ".json");
         }
 
-        public ArticlePath(string path)
+        public static ArticlePath ForContent(IConfigurationRoot configuration)
+        {
+            var contentPath = Path.Combine(configuration["BasePath"], configuration["ArticleContentPath"]);
+
+            if (!Directory.Exists(contentPath))
+                throw ExceptionBecause.InvalidArticlePath(contentPath);
+
+            return new ArticlePath(contentPath, ".md");
+        }
+
+        public ArticlePath(string path, string extension)
         {
             _path = path;
-        }
-
-        public string For(ArticleIdentifier identifier)
-        {
-            return Path.Combine(_path, identifier.ToString());
+            _extension = extension;
         }
 
         public IEnumerable<string> GetAll()
         {
-            return Directory.GetFiles(_path, "*.json");
+            return Directory.GetFiles(_path, $"*{_extension}");
         }
 
-        public string LoadFrom(ArticleIdentifier identifier)
+        public string LoadFor(ArticleIdentifier identifier)
         {
-            var filePath = $"{For(identifier)}.json";
+            var filePath = $"{Path.Combine(_path, identifier.ToString())}{_extension}";
 
             if(!System.IO.File.Exists(filePath))
                 throw ExceptionBecause.ArticleNotFound(identifier);
@@ -48,16 +55,6 @@ namespace CleanKludge.Data.File.Articles
         public string LoadFrom(string filePath)
         {
             return System.IO.File.ReadAllText(filePath);
-        }
-
-        public void Save(ArticleIdentifier identifier, string jsonString)
-        {
-            System.IO.File.WriteAllText(_path, jsonString);
-        }
-
-        public void Delete(ArticleIdentifier reference)
-        {
-            System.IO.File.Delete(Path.Combine(_path, reference.ToString()));
         }
     }
 }

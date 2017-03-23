@@ -1,5 +1,4 @@
-﻿using CleanKludge.Api.Responses;
-using CleanKludge.Api.Responses.Articles;
+﻿using CleanKludge.Api.Responses.Articles;
 using CleanKludge.Core.Errors;
 
 namespace CleanKludge.Core.Articles.Extensions

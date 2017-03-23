@@ -1,14 +1,11 @@
-﻿using CleanKludge.Api.Responses;
-using CleanKludge.Api.Responses.Articles;
+﻿using CleanKludge.Api.Responses.Articles;
 using CleanKludge.Server.Articles.Filters;
 using CleanKludge.Services.Content;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanKludge.Server.Controllers
 {
     [Route("")]
-    [AllowAnonymous]
     [DynamicArea(Location.Home)]
     public class HomeController : Controller
     {
@@ -22,7 +19,7 @@ namespace CleanKludge.Server.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var articles = _contentService.Latest(User.Identity.IsAuthenticated);
+            var articles = _contentService.Latest();
             return View(articles.ToResponse());
         }
     }
