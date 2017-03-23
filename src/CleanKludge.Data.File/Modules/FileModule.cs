@@ -13,9 +13,9 @@ namespace CleanKludge.Data.File.Modules
         public static IServiceCollection AddFileServices(this IServiceCollection self, IConfigurationRoot configuration)
         {
             self.TryAddSingleton<IMemoryCache>(provider => new MemoryCache(new MemoryCacheOptions()));
-            self.TryAddTransient<ISerializer, JsonSerializer>();
-            self.TryAddTransient<IArticleSummaryRepository>(c => new ArticleSummaryRepository(ArticlePath.ForSummaries(c.GetService<IConfigurationRoot>()), c.GetService<IMemoryCache>(), c.GetService<ISerializer>()));
-            self.TryAddTransient<IArticleRepository>(c => new ArticleRepository(ArticlePath.ForContent(c.GetService<IConfigurationRoot>()), c.GetService<IMemoryCache>(), c.GetService<IArticleSummaryRepository>()));
+            self.TryAddSingleton<ISerializer, JsonSerializer>();
+            self.TryAddSingleton<IArticleSummaryRepository>(c => new ArticleSummaryRepository(ArticlePath.ForSummaries(c.GetService<IConfigurationRoot>()), c.GetService<IMemoryCache>(), c.GetService<ISerializer>()));
+            self.TryAddSingleton<IArticleRepository>(c => new ArticleRepository(ArticlePath.ForContent(c.GetService<IConfigurationRoot>()), c.GetService<IMemoryCache>(), c.GetService<IArticleSummaryRepository>()));
             return self;
         }
     }

@@ -13,6 +13,11 @@ namespace CleanKludge.Services.Content
             _articleRepository = articleRepository;
         }
 
+        public Article For(ArticleIdentifier reference)
+        {
+            return Article.LoadFrom(_articleRepository, reference);
+        }
+
         public Summaries Latest()
         {
             return Summaries.AllFrom(_articleSummaryRepository)
@@ -24,11 +29,6 @@ namespace CleanKludge.Services.Content
             return Summaries.AllFrom(_articleSummaryRepository)
                 .ForSection(location)
                 .GroupBy(grouping);
-        }
-
-        public Article For(ArticleIdentifier reference)
-        {
-            return Article.LoadFrom(_articleRepository, reference);
         }
     }
 }

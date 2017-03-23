@@ -3,18 +3,6 @@
     ViewBag.Keywords = "CleanKludge";
 }
 
-@section scripts {
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('button', '.center', '#contact-content').click(function () {
-                $.get('@Url.Action("Contact")', function (data) {
-                    $('#contact-content').html(data);
-                });
-            });
-        });
-    </script>
-}
-
 <section>
     <article>
         <h1 class="background-highlight2">About me</h1>
@@ -26,9 +14,12 @@
                 <img class="col-sm-3" src="~/images/author.jpg" alt="Picture of the author" style="width: 176px; height: 176px" />
             </div>
             <h2 class="background-highlight row">Contact Details</h2>
-            <article id="contact-content" class="row">
-                <div class="center">
-                    <button class="btn btn-primary">Show</button>
+            <article>
+                <div>
+                    <address>
+                        <strong>Email</strong><br>
+                        <a href="mailto:#">steve@cleankludge.com</a>
+                    </address>
                 </div>
             </article>
         </article>

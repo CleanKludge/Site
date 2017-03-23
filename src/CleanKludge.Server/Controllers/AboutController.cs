@@ -1,6 +1,5 @@
-﻿using CleanKludge.Api.Responses;
-using CleanKludge.Api.Responses.Articles;
-using CleanKludge.Server.Articles.Filters;
+﻿using CleanKludge.Api.Responses.Articles;
+using CleanKludge.Server.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

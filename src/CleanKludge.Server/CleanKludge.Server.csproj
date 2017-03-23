@@ -67,11 +67,24 @@
     <None Remove="logs\**" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="wwwroot\articles\content\test-disabled.json">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="wwwroot\articles\content\test.json">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
+    <Content Include="wwwroot\articles\test-disabled.json" />
+    <Content Include="wwwroot\articles\test.json" />
+    <Content Include="wwwroot\articles\test.md" />
+    <Content Include="wwwroot\less\about-theme.less" />
+    <Content Include="wwwroot\less\base-theme.less" />
+    <Content Include="wwwroot\less\blog-theme.less" />
+    <Content Include="wwwroot\less\error-theme.less" />
+    <Content Include="wwwroot\less\experiments-theme.less" />
+    <Content Include="wwwroot\less\home-theme.less" />
+    <Content Include="wwwroot\less\site.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\less\about-theme.less" />
+    <None Include="wwwroot\less\base-theme.less" />
+    <None Include="wwwroot\less\blog-theme.less" />
+    <None Include="wwwroot\less\error-theme.less" />
+    <None Include="wwwroot\less\experiments-theme.less" />
+    <None Include="wwwroot\less\home-theme.less" />
+    <None Include="wwwroot\less\site.less" />
   </ItemGroup>
 </Project>

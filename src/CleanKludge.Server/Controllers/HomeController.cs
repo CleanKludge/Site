@@ -1,5 +1,5 @@
 ﻿using CleanKludge.Api.Responses.Articles;
-using CleanKludge.Server.Articles.Filters;
+using CleanKludge.Server.Filters;
 using CleanKludge.Services.Content;
 using Microsoft.AspNetCore.Mvc;
 

@@ -9,7 +9,7 @@ namespace CleanKludge.Services.Modules
     {
         public static IServiceCollection AddSevices(this IServiceCollection self, IConfigurationRoot configurationRoot)
         {
-            self.TryAddTransient<ContentService>();
+            self.TryAddSingleton<ContentService>();
             return self;
         }
     }

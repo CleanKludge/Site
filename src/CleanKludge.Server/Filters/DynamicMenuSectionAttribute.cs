@@ -3,7 +3,7 @@ using CleanKludge.Api.Responses.Articles;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace CleanKludge.Server.Articles.Filters
+namespace CleanKludge.Server.Filters
 {
     public class DynamicAreaAttribute : Attribute, IResultFilter
     {

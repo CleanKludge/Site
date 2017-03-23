@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using CleanKludge.Core.Articles;
-using CleanKludge.Server.Articles.Filters;
 using CleanKludge.Server.Extensions;
+using CleanKludge.Server.Filters;
 using CleanKludge.Services.Content;
 using Microsoft.AspNetCore.Mvc;
 using Location = CleanKludge.Api.Responses.Articles.Location;

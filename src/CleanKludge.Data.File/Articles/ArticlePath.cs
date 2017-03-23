@@ -13,7 +13,7 @@ namespace CleanKludge.Data.File.Articles
 
         public static ArticlePath ForSummaries(IConfigurationRoot configuration)
         {
-            var contentPath = Path.Combine(configuration["BasePath"], configuration["ArticleSummaryPath"]);
+            var contentPath = Path.Combine(configuration["BasePath"], configuration["ArticlesPath"]);
 
             if (!Directory.Exists(contentPath))
                 throw ExceptionBecause.InvalidArticlePath(contentPath);
@@ -23,7 +23,7 @@ namespace CleanKludge.Data.File.Articles
 
         public static ArticlePath ForContent(IConfigurationRoot configuration)
         {
-            var contentPath = Path.Combine(configuration["BasePath"], configuration["ArticleContentPath"]);
+            var contentPath = Path.Combine(configuration["BasePath"], configuration["ArticlesPath"]);
 
             if (!Directory.Exists(contentPath))
                 throw ExceptionBecause.InvalidArticlePath(contentPath);

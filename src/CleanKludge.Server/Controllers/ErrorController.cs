@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using CleanKludge.Api.Responses.Articles;
-using CleanKludge.Server.Articles.Filters;
+using CleanKludge.Server.Filters;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
