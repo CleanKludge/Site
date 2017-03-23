@@ -1,4 +1,4 @@
-0* {
+* {
   font-family: 'Open Sans', sans-serif;
   font-family: inherit;
   margin: 0;
@@ -72,15 +72,15 @@ a {
   display: block;
   font-weight: 400;
 }
-.strikethrough {
-  text-decoration: line-through;
-}
-.content {
+article > div {
   padding: 20px 20px 15px;
   background-color: #ffffff;
   border: 1px solid #ddd;
 }
-article > div {
+.strikethrough {
+  text-decoration: line-through;
+}
+.content {
   padding: 20px 20px 15px;
   background-color: #ffffff;
   border: 1px solid #ddd;
@@ -96,6 +96,132 @@ article a:hover {
 }
 article .clickable:hover {
   font-weight: bold;
+}
+.content {
+  /* HTML5 display-role reset for older browsers */
+}
+.content html,
+.content body,
+.content div,
+.content span,
+.content applet,
+.content object,
+.content iframe,
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6,
+.content p,
+.content blockquote,
+.content pre,
+.content a,
+.content abbr,
+.content acronym,
+.content address,
+.content big,
+.content cite,
+.content code,
+.content del,
+.content dfn,
+.content em,
+.content img,
+.content ins,
+.content kbd,
+.content q,
+.content s,
+.content samp,
+.content small,
+.content strike,
+.content strong,
+.content sub,
+.content sup,
+.content tt,
+.content var,
+.content b,
+.content u,
+.content i,
+.content center,
+.content dl,
+.content dt,
+.content dd,
+.content ol,
+.content ul,
+.content li,
+.content fieldset,
+.content form,
+.content label,
+.content legend,
+.content table,
+.content caption,
+.content tbody,
+.content tfoot,
+.content thead,
+.content tr,
+.content th,
+.content td,
+.content article,
+.content aside,
+.content canvas,
+.content details,
+.content embed,
+.content figure,
+.content figcaption,
+.content footer,
+.content header,
+.content hgroup,
+.content menu,
+.content nav,
+.content output,
+.content ruby,
+.content section,
+.content summary,
+.content time,
+.content mark,
+.content audio,
+.content video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+.content article,
+.content aside,
+.content details,
+.content figcaption,
+.content figure,
+.content footer,
+.content header,
+.content hgroup,
+.content menu,
+.content nav,
+.content section {
+  display: block;
+}
+.content body {
+  line-height: 1;
+}
+.content ol,
+.content ul {
+  list-style: none;
+}
+.content blockquote,
+.content q {
+  quotes: none;
+}
+.content blockquote:before,
+.content blockquote:after,
+.content q:before,
+.content q:after {
+  content: '';
+  content: none;
+}
+.content table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 .navbar {
   padding-bottom: 0.4em;
@@ -206,206 +332,14 @@ ul.nav > li.menu-item.active a:hover {
     padding-top: 15px;
     padding-bottom: 14px;
   }
-  .equal,
-  .equal > div[class*='col-'] {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    flex: 1 0 auto;
-  }
-  .col-xs-1,
-  .col-sm-1,
-  .col-md-1,
-  .col-lg-1,
-  .col-xs-2,
-  .col-sm-2,
-  .col-md-2,
-  .col-lg-2,
-  .col-xs-3,
-  .col-sm-3,
-  .col-md-3,
-  .col-lg-3,
-  .col-xs-4,
-  .col-sm-4,
-  .col-md-4,
-  .col-lg-4,
-  .col-xs-5,
-  .col-sm-5,
-  .col-md-5,
-  .col-lg-5,
-  .col-xs-6,
-  .col-sm-6,
-  .col-md-6,
-  .col-lg-6,
-  .col-xs-7,
-  .col-sm-7,
-  .col-md-7,
-  .col-lg-7,
-  .col-xs-8,
-  .col-sm-8,
-  .col-md-8,
-  .col-lg-8,
-  .col-xs-9,
-  .col-sm-9,
-  .col-md-9,
-  .col-lg-9,
-  .col-xs-10,
-  .col-sm-10,
-  .col-md-10,
-  .col-lg-10,
-  .col-xs-11,
-  .col-sm-11,
-  .col-md-11,
-  .col-lg-11,
-  .col-xs-12,
-  .col-sm-12,
-  .col-md-12,
-  .col-lg-12 {
-    padding-right: 0px;
-    padding-left: 15px;
-  }
-}
-@media screen and (max-width: 768px) {
-  .container {
-    padding-right: 0px;
-    padding-left: 0px;
-  }
-  .row > div {
-    margin-bottom: 5px;
-  }
-  .col-xs-1,
-  .col-sm-1,
-  .col-md-1,
-  .col-lg-1,
-  .col-xs-2,
-  .col-sm-2,
-  .col-md-2,
-  .col-lg-2,
-  .col-xs-3,
-  .col-sm-3,
-  .col-md-3,
-  .col-lg-3,
-  .col-xs-4,
-  .col-sm-4,
-  .col-md-4,
-  .col-lg-4,
-  .col-xs-5,
-  .col-sm-5,
-  .col-md-5,
-  .col-lg-5,
-  .col-xs-6,
-  .col-sm-6,
-  .col-md-6,
-  .col-lg-6,
-  .col-xs-7,
-  .col-sm-7,
-  .col-md-7,
-  .col-lg-7,
-  .col-xs-8,
-  .col-sm-8,
-  .col-md-8,
-  .col-lg-8,
-  .col-xs-9,
-  .col-sm-9,
-  .col-md-9,
-  .col-lg-9,
-  .col-xs-10,
-  .col-sm-10,
-  .col-md-10,
-  .col-lg-10,
-  .col-xs-11,
-  .col-sm-11,
-  .col-md-11,
-  .col-lg-11,
-  .col-xs-12,
-  .col-sm-12,
-  .col-md-12,
-  .col-lg-12 {
-    padding-right: 0px;
-    padding-left: 0px;
-  }
-  .col-xs-1 div,
-  .col-sm-1 div,
-  .col-md-1 div,
-  .col-lg-1 div,
-  .col-xs-2 div,
-  .col-sm-2 div,
-  .col-md-2 div,
-  .col-lg-2 div,
-  .col-xs-3 div,
-  .col-sm-3 div,
-  .col-md-3 div,
-  .col-lg-3 div,
-  .col-xs-4 div,
-  .col-sm-4 div,
-  .col-md-4 div,
-  .col-lg-4 div,
-  .col-xs-5 div,
-  .col-sm-5 div,
-  .col-md-5 div,
-  .col-lg-5 div,
-  .col-xs-6 div,
-  .col-sm-6 div,
-  .col-md-6 div,
-  .col-lg-6 div,
-  .col-xs-7 div,
-  .col-sm-7 div,
-  .col-md-7 div,
-  .col-lg-7 div,
-  .col-xs-8 div,
-  .col-sm-8 div,
-  .col-md-8 div,
-  .col-lg-8 div,
-  .col-xs-9 div,
-  .col-sm-9 div,
-  .col-md-9 div,
-  .col-lg-9 div,
-  .col-xs-10 div,
-  .col-sm-10 div,
-  .col-md-10 div,
-  .col-lg-10 div,
-  .col-xs-11 div,
-  .col-sm-11 div,
-  .col-md-11 div,
-  .col-lg-11 div,
-  .col-xs-12 div,
-  .col-sm-12 div,
-  .col-md-12 div,
-  .col-lg-12 div {
-    padding-right: 0px;
-    padding-left: 15px;
-  }
 }
 article div ul {
   margin-left: 23px;
   list-style: disc;
 }
-.editor-field {
-  background-color: transparent;
-  border: none;
-  text-align: center;
-  letter-spacing: 4px;
-}
-.editor-area {
-  background-color: transparent;
-  border: none;
-  width: 100%;
-  resize: none;
-}
 .background-highlight input,
 .background-highlight2 input {
   color: #f2f2f2;
-}
-.editor-section-controls {
-  text-align: right;
-}
-.editor-section {
-  padding: 0 !important;
-}
-.editor-section-row {
-  margin-bottom: 5px;
 }
 section .labels {
   text-align: center;
@@ -429,4 +363,58 @@ section .labels {
 .editor-label:hover {
   cursor: pointer;
   background-color: #848484;
+}
+.definition {
+  height: 205px;
+}
+.col-xs-1,
+.col-sm-1,
+.col-md-1,
+.col-lg-1,
+.col-xs-2,
+.col-sm-2,
+.col-md-2,
+.col-lg-2,
+.col-xs-3,
+.col-sm-3,
+.col-md-3,
+.col-lg-3,
+.col-xs-4,
+.col-sm-4,
+.col-md-4,
+.col-lg-4,
+.col-xs-5,
+.col-sm-5,
+.col-md-5,
+.col-lg-5,
+.col-xs-6,
+.col-sm-6,
+.col-md-6,
+.col-lg-6,
+.col-xs-7,
+.col-sm-7,
+.col-md-7,
+.col-lg-7,
+.col-xs-8,
+.col-sm-8,
+.col-md-8,
+.col-lg-8,
+.col-xs-9,
+.col-sm-9,
+.col-md-9,
+.col-lg-9,
+.col-xs-10,
+.col-sm-10,
+.col-md-10,
+.col-lg-10,
+.col-xs-11,
+.col-sm-11,
+.col-md-11,
+.col-lg-11,
+.col-xs-12,
+.col-sm-12,
+.col-md-12,
+.col-lg-12 {
+  padding-right: 0px;
+  padding-left: 0px;
 }

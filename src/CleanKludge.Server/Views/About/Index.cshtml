@@ -3,25 +3,36 @@
     ViewBag.Keywords = "CleanKludge";
 }
 
-<section>
-    <article>
-        <h1 class="background-highlight2">About me</h1>
-        <article class="container">
-            <div class="row row-nested equal">
-                <div class="col-sm-9 content">
-                    Stephen Phillips is a server-side enginer based in Brighton, U.K., with over five years industry experience working with C# within an agile environment. He holds a first class honours degree from Staffordshire University in Computer Games Programming. Stephen has a passion for clean code and agile practices all wrapped up in neat software architectures. When not tinkering with code, he likes fencing and Airsofting.
-                </div>
-                <img class="col-sm-3" src="~/images/author.jpg" alt="Picture of the author" style="width: 176px; height: 176px" />
+<section class="container-fluid">
+    <div class="row">
+        <h1 class="background-highlight2 col-sm-12">About me</h1>
+    </div>
+</section>
+
+<section class="container">
+    <div class="row">
+        <article class="col-sm-9">
+            <div>
+                <p>Stephen Phillips is a server-side enginer based in Brighton, U.K., with over five years industry experience working with C# within an agile environment. He holds a first class honours degree from Staffordshire University in Computer Games Programming. Stephen has a passion for clean code and agile practices all wrapped up in neat software architectures. When not tinkering with code, he likes fencing and Airsofting.</p>
             </div>
-            <h2 class="background-highlight row">Contact Details</h2>
-            <article>
-                <div>
-                    <address>
-                        <strong>Email</strong><br>
-                        <a href="mailto:#">steve@cleankludge.com</a>
-                    </address>
-                </div>
-            </article>
         </article>
-    </article>
+        <article class="col-sm-3">
+            <img src="~/images/author.jpg" alt="Picture of the author" style="width: 176px; height: 176px" />
+        </article>
+    </div>
+</section>
+<section class="container">
+    <div class="row">
+        <h2 class="background-highlight col-sm-12">Contact Details</h2>
+    </div>
+    <div class="row">  
+        <article class="col-sm-12">
+            <div>
+                <address>
+                    <strong>Email</strong><br>
+                    <a href="mailto:#">steve@cleankludge.com</a>
+                </address>
+            </div>
+        </article>
+    </div>
 </section>

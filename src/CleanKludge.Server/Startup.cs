@@ -25,7 +25,7 @@ namespace CleanKludge.Server
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .MinimumLevel.Information()
-                .WriteTo.RollingFile(new JsonFormatter(), "logs/log-{Date}.log", LogEventLevel.Information)
+                .WriteTo.RollingFile(new JsonFormatter(), "logs/log-{Date}.log", LogEventLevel.Information, 10485760, 2)
                 .CreateLogger();
 
             HostingEnvironment = hostingEnvironment;

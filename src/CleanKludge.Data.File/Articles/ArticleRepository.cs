@@ -25,7 +25,7 @@ namespace CleanKludge.Data.File.Articles
             var contents = _articlePath.LoadFor(identifier);
 
             record = new ArticleRecord { Summary = summary, Content = contents };
-            _memoryCache.Set(MemoryCacheKey.ForContent(identifier), contents);
+            _memoryCache.Set(MemoryCacheKey.ForContent(identifier), record);
 
             return record;
         }
