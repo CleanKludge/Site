@@ -22,6 +22,7 @@ ul.nav > li.menu-item button:hover {
 }
 .btn.active {
   background-color: #c0392b;
+  color: #fff;
 }
 .btn-info {
   color: #fff;

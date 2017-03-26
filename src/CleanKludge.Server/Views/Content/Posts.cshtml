@@ -26,10 +26,10 @@
     <div class="row">
         <div class="col-sm-12 text-center">
             <div class="btn-group" data-toggle="buttons">
-                <label class="btn @(Model.GroupedBy == GroupedBy.Date ? "active" : "")">
+                <label class="btn @(Model.GroupedBy == GroupedBy.Date ? "active" : "inactive")">
                     <input type="radio" name="options" autocomplete="off" value="@GroupedBy.Date" @(Model.GroupedBy == GroupedBy.Date ? "checked" : "") /> By Date
                 </label>
-                <label class="btn @(Model.GroupedBy == GroupedBy.Category ? "active" : "")">
+                <label class="btn @(Model.GroupedBy == GroupedBy.Category ? "active" : "inactive")">
                     <input type="radio" name="options" autocomplete="off" value="@GroupedBy.Category" @(Model.GroupedBy == GroupedBy.Category ? "checked" : "") />By Category
                 </label>
             </div>
@@ -61,14 +61,7 @@
                                         <ul class="list-inline">
                                             <li>
                                                 <a asp-controller="Content" asp-action="Post" asp-all-route-data='@(new Dictionary<string, string> {{"reference", summary.Identifier.ToLower()}, {nameof(Location).ToLower(), summary.Area.ToLower()}})'>
-                                                    @if(summary.Enabled)
-                                                    {
-                                                        @summary.Title
-                                                    }
-                                                    else
-                                                    {
-                                                        <span class="strikethrough">@summary.Title</span>
-                                                    }
+                                                    @summary.Title
                                                 </a>
                                             </li>
                                         </ul>

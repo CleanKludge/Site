@@ -6,19 +6,6 @@
     color: #848484;
 }
 
-.row-nested {
-    .transparent;
-    .no-padding;
-}
-
-.no-padding {
-    padding: 0px;
-}
-
-.transparent {
-    background-color: transparent;
-}
-
 html, body, .container-fluid {
     padding-left: 0px !important;
     padding-right: 0px !important;
@@ -48,70 +35,80 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	letter-spacing: 4px;
-	text-align: center;
-	margin: 5px 0;
-	overflow: hidden;
+    letter-spacing: 4px;
+    text-align: center;
+    margin: 5px 0;
+    overflow: hidden;
 }
-	
+
 h1 {
-	font-size: 1.8em;
-	line-height: 1.4em;
+    font-size: 1.8em;
+    line-height: 1.4em;
 }
 
 h2, h3 {
     font-size: 1.4em;
     line-height: 1.4em;
 }
-	
+
 p {
-	color: #848484;
-}
-
-ul {
-	list-style: none;
-}
-
-a {
-	text-decoration: none;
-	cursor: pointer;
-	display: block;
-	font-weight: 400;
-}
-
-article > div {
-    padding: 20px 20px 15px;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-}
-
-.strikethrough {
-    text-decoration: line-through;
-}
-
-.content {
-    padding: 20px 20px 15px;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-}
-
-article > div > p {
-    white-space:pre-wrap;
-}
-
-article a {
     color: #848484;
 }
 
-article a:hover {
-    text-decoration: none;
+ul {
+    list-style: none;
 }
 
-article .clickable:hover {
-    font-weight:bold;
+a {
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+    font-weight: 400;
 }
 
 .content {
+    padding: 5px 20px 15px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+
+    h1, h2, h3, h4, h5, h6 {
+        text-align: left;
+        letter-spacing: normal;
+    }
+}
+
+article {
+    & > div > p {
+        white-space: pre-wrap;
+    }
+
+    a {
+        color: #848484;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    .clickable:hover {
+        font-weight: bold;
+    }
+
+    div ul {
+        margin-left: 23px;
+        list-style: disc;
+    }
+
+    & > div {
+        padding: 20px 20px 15px;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+    }
+
+    & > img {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+    }
 }
 
 .navbar {
@@ -120,53 +117,46 @@ article .clickable:hover {
     font-weight: 500;
 }
 
-nav a, nav button {
-    color: #848484;
+nav {
+    a, button {
+        color: #848484;
+    }
 }
 
-footer  {
-   text-align: center;
-   padding-top: 20px;
-   position:absolute;
-   bottom:0;
-   width: 100%;
-}
-
-footer .navbar-nav {  
-    display: inline-block  !important;
-    float: none !important;
-}
-
-footer .navbar-nav > li {  
-    display: inline-block  !important;
-    float: none !important;
-}
-
-footer .navbar-nav a { 
-    color: #848484;
-}
-
-ul.nav li a:hover, ul.nav li button:hover {
-    background-color: #000;
-}
-
-.navbar-btn {
-    border: none;
-    border-radius: 0;
-    background: none;
-    margin: 0;
+footer {
+    text-align: center;
+    padding-top: 20px;
+    position: absolute;
+    bottom: 0;
     width: 100%;
-    text-align: left;
-    padding: 10px 15px;
-    letter-spacing: 4px;
+
+    .navbar-nav {
+        display: inline-block !important;
+        float: none !important;
+
+        & > li {
+            display: inline-block !important;
+            float: none !important;
+        }
+
+        a {
+            color: #848484;
+        }
+    }
 }
 
-ul.nav > li.menu-item.active a {
-    color:#f2f2f2;
-}
+ul.nav {
+    & li a:hover, & li button:hover {
+        background-color: #000;
+    }
 
-ul.nav > li.menu-item.active a:hover {
-    color:#f2f2f2;
+    & > li.menu-item.active a {
+        color: #f2f2f2;
+    }
+
+    & > li.menu-item.active a:hover {
+        color: #f2f2f2;
+    }
 }
 
 .bold {
@@ -192,15 +182,6 @@ ul.nav > li.menu-item.active a:hover {
     font-style: italic;
 }
 
-.post-info {
-    text-align: right;
-}
-
-.contact-message {
-    height: 219px !important;
-    resize: none;
-}
-
 .btn-group {
       font-size: 1em;
       line-height: 1em;
@@ -211,22 +192,12 @@ ul.nav > li.menu-item.active a:hover {
       overflow: hidden;
 }
 
-.btn.active {
-    color: #ffffff;
-}
-
-.btn:hover {
+.btn {
     color: #848484;
-}
 
-.btn.active:hover {
-    color: #ffffff;
-}
-
-.floating-right {
-    position: absolute;
-    right: -40px;
-    top: 0;
+    .active {
+        color: #ffffff;
+    }
 }
 
 .inline {
@@ -246,44 +217,10 @@ ul.nav > li.menu-item.active a:hover {
         padding-top: 15px;
         padding-bottom: 14px;
     }
-}
 
-article div ul {
-    margin-left: 23px;
-    list-style:disc;
-}
-
-.background-highlight input, .background-highlight2 input {
-    color: #f2f2f2;
-}
-
-section .labels {
-    text-align: center;
-    padding: 0;
-    margin: 0;
-    background: none;
-}
-
-.center {
-    text-align: center;
-}
-
-.editor-labels {
-    margin-left: 5px;
-    width: 70px;
-}
-
-.navbar-right {
-    margin-right: -10px;
-}
-
-.editor-label {
-    margin-right: 5px;
-}
-
-.editor-label:hover {
-    cursor: pointer;
-    background-color: #848484;
+    .margin-right {
+        margin-right: 5px;
+    }
 }
 
 .definition {
@@ -305,4 +242,3 @@ section .labels {
     padding-right: 0px;
     padding-left: 0px;
 }
-
