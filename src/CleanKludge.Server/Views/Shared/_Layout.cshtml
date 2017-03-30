@@ -42,7 +42,7 @@
         <link rel="stylesheet" href="~/lib/rainbow/themes/css/rainbow.css" />
         <link rel="stylesheet" href="~/lib/fontawesome/css/font-awesome.css" />
         <link rel="stylesheet" href="~/css/site.css" />
-        <link rel="stylesheet" href="~/css/@(ViewData[nameof(Location)])-theme.css" />
+        <link rel="stylesheet" href="~/css/@(ViewData[nameof(Location)].ToString().ToLower())-theme.css" />
     </environment>
     <environment names="Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -51,7 +51,7 @@
         <link rel="stylesheet" href="~/lib/rainbow/themes/css/rainbow.css" />
         <link rel="stylesheet" href="~/lib/fontawesome/css/font-awesome.min.css" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true"/>
-        <link rel="stylesheet" href="~/css/@(ViewData[nameof(Location)])-theme.min.css" asp-append-version="true"/>
+        <link rel="stylesheet" href="~/css/@(ViewData[nameof(Location)].ToString().ToLower())-theme.min.css" asp-append-version="true"/>
     </environment>
 
     <link rel="apple-touch-icon" sizes="57x57" href="~/favicons/apple-touch-icon-57x57.png">

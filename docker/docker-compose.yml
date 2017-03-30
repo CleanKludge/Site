@@ -1,0 +1,6 @@
+version: '2'
+services:
+  server:
+    image: cleankludge/website:unstable
+    ports:
+     - "8080:80"

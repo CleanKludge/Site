@@ -266,3 +266,4 @@ __pycache__/
 # Minified files
 *.min.css
 *.min.js
+/src/CleanKludge.Server/wwwroot/css
