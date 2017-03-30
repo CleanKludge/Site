@@ -36,7 +36,7 @@ namespace CleanKludge.Core.Articles
             return new SummaryResponse
             {
                 Area =_summary.Location.ToString(),
-                Identifier = _summary.Identifier.ToString(),
+                Identifier = _summary.Identifier?.ToString(),
                 Title = _summary.Title,
                 Created = _summary.Created,
                 Description = _summary.Description,

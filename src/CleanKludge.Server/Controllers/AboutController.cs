@@ -14,11 +14,5 @@ namespace CleanKludge.Server.Controllers
         {
             return View();
         }
-
-        [HttpGet("contact")]
-        public IActionResult Contact()
-        {
-            return PartialView("Partials/ContactInfo");
-        }
     }
 }

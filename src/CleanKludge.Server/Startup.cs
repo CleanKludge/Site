@@ -6,6 +6,7 @@ using LightInject;
 using LightInject.Microsoft.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -46,7 +47,19 @@ namespace CleanKludge.Server
             services.AddOptions();
             services.AddFileServices(Configuration);
             services.AddSevices(Configuration);
-            services.AddMvc();
+            services.AddResponseCaching();
+            services.AddMvc(options =>
+            {
+                options.CacheProfiles.Add("Default", new CacheProfile
+                {
+                    Location = ResponseCacheLocation.Any,
+                    NoStore = false,
+                    VaryByQueryKeys = new []{ "groupBy" },
+                    Duration = 60
+                });
+
+                options.Filters.Add(new ResponseCacheAttribute { CacheProfileName = "Default" });
+            });
 
             return new ServiceContainer()
                 .CreateServiceProvider(services);
@@ -57,6 +70,7 @@ namespace CleanKludge.Server
             if(HostingEnvironment.IsDevelopment())
                 applicationBuilder.UseDeveloperExceptionPage();
 
+            applicationBuilder.UseResponseCaching();
             applicationBuilder.UseStatusCodePagesWithRedirects("/error/{0}");
             applicationBuilder.UseStaticFiles();
             applicationBuilder.UseMvc();
