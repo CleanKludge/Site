@@ -78,6 +78,7 @@
     <Content Include="wwwroot\less\experiments-theme.less" />
     <Content Include="wwwroot\less\home-theme.less" />
     <Content Include="wwwroot\less\site.less" />
+    <Content Include="wwwroot\robots.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\less\about-theme.less" />
