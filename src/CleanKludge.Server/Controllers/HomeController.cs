@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CleanKludge.Server.Controllers
 {
     [Route("")]
-    [DynamicArea(Location.Home)]
+    [DynamicLocation(Location.Home)]
     public class HomeController : Controller
     {
         private readonly ContentService _contentService;

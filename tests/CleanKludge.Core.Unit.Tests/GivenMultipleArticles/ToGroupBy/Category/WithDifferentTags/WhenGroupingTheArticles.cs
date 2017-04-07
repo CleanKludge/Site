@@ -4,7 +4,7 @@ using CleanKludge.Api.Responses.Articles;
 using CleanKludge.Core.Articles;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CleanKludge.Core.Unit.Tests.GivenMultipleArticles.ToGroupBy.Date.CreatedOnDifferentYears
+namespace CleanKludge.Core.Unit.Tests.GivenMultipleArticles.ToGroupBy.Category.WithDifferentTags
 {
     [TestClass]
     public class WhenGroupingTheArticles
@@ -16,18 +16,18 @@ namespace CleanKludge.Core.Unit.Tests.GivenMultipleArticles.ToGroupBy.Date.Creat
         {
             var articleSummaries = new List<ArticleSummary>
             {
-                ArticleSummary.From(new ArticleDto { Created = new DateTimeOffset(new DateTime(2016, 01, 24, 08, 30, 55)), Title = "1" }),
-                ArticleSummary.From(new ArticleDto { Created = new DateTimeOffset(new DateTime(2017, 01, 24, 08, 30, 55)), Title = "2" })
+                ArticleSummary.From(new ArticleDto { Created = new DateTimeOffset(new DateTime(2017, 01, 24, 08, 30, 55)), Title = "1", Tags = new List<string> { "1", "2" } }),
+                ArticleSummary.From(new ArticleDto { Created = new DateTimeOffset(new DateTime(2017, 01, 25, 08, 30, 55)), Title = "2", Tags = new List<string> { "2", "3" } })
             };
 
-            var subject = GroupedSummaries.From(articleSummaries, Grouping.Date);
+            var subject = GroupedSummaries.From(articleSummaries, Grouping.Category);
             _result = subject.ToResponse();
         }
 
         [TestMethod]
-        public void ThenTheArticlesAreGroupedByDate()
+        public void ThenTheArticlesAreGroupedByCategory()
         {
-            Assert.IsTrue(_result.GroupedBy == GroupedBy.Date);
+            Assert.IsTrue(_result.GroupedBy == GroupedBy.Category);
         }
 
         [TestMethod]
@@ -43,15 +43,15 @@ namespace CleanKludge.Core.Unit.Tests.GivenMultipleArticles.ToGroupBy.Date.Creat
         }
 
         [TestMethod]
-        public void ThenThereIsAGroupFor2016()
+        public void ThenThereIsAGroupForTheFirstTag()
         {
-            Assert.IsTrue(_result.Groups[0]["Jan 2016"].Count == 1);
+            Assert.IsTrue(_result.Groups[0]["1"].Count == 1);
         }
 
         [TestMethod]
-        public void ThenThereIsAGroupFor2017()
+        public void ThenThereIsAGroupForTheSecondTag()
         {
-            Assert.IsTrue(_result.Groups[0]["Jan 2017"].Count == 1);
+            Assert.IsTrue(_result.Groups[0]["2"].Count == 1);
         }
     }
 }

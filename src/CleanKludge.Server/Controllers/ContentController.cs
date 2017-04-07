@@ -8,7 +8,7 @@ using Location = CleanKludge.Api.Responses.Articles.Location;
 
 namespace CleanKludge.Server.Controllers
 {
-    [DynamicArea(Location.Blog)]
+    [DynamicLocation(Location.Blog)]
     [Route("{location:regex(blog|experiments)}")]
     public class ContentController : Controller
     {

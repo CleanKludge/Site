@@ -8,7 +8,7 @@ using Serilog;
 namespace CleanKludge.Server.Controllers
 {
     [Route("error")]
-    [DynamicArea(Location.Error)]
+    [DynamicLocation(Location.Error)]
     public class ErrorController : Controller
     {
         private readonly ILogger _logger;

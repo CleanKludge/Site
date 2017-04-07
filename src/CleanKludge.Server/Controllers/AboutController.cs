@@ -7,7 +7,7 @@ namespace CleanKludge.Server.Controllers
 {
     [Route("about")]
     [AllowAnonymous]
-    [DynamicArea(Location.About)]
+    [DynamicLocation(Location.About)]
     public class AboutController : Controller
     {
         public IActionResult Index()

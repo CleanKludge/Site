@@ -31,13 +31,19 @@ namespace CleanKludge.Core.Unit.Tests.GivenMultipleArticles.ToGroupBy.Date.Creat
         }
 
         [TestMethod]
+        public void ThenThereIsOneRow()
+        {
+            Assert.IsTrue(_result.Groups.Count == 1);
+        }
+
+        [TestMethod]
         public void ThenThereIsASingleGroup()
         {
             Assert.IsTrue(_result.Groups.Count == 1);
         }
 
         [TestMethod]
-        public void ThereAllSummariesArePlacedInTheSameGroup()
+        public void ThenAllSummariesArePlacedInTheSameGroup()
         {
             Assert.IsTrue(_result.Groups[0]["Jan 2017"].Count == 2);
         }

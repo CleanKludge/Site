@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace CleanKludge.Server.Filters
 {
-    public class DynamicAreaAttribute : Attribute, IResultFilter
+    public class DynamicLocationAttribute : Attribute, IResultFilter
     {
         private readonly Location _location;
 
-        public DynamicAreaAttribute(Location location)
+        public DynamicLocationAttribute(Location location)
         {
             _location = location;
         }

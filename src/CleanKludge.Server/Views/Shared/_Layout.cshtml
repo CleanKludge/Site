@@ -81,6 +81,7 @@
             </button>
             <a class="navbar-brand" asp-controller="Home" asp-action="Index"><span class="bold">Clean</span>Kludge</a>
         </div>
+        <div style="display: none"> © 2014 - @(DateTime.Now.Year) Stephen Phillips</div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="menu-item @((Location)ViewData[nameof(Location)] == Location.Home ? "active" : "")"><a asp-controller="Home" asp-action="Index">Home</a></li>
