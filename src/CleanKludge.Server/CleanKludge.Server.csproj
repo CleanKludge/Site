@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="GitInfo" Version="1.1.48" />
     <PackageReference Include="LightInject.Microsoft.DependencyInjection" Version="2.0.1" />
     <PackageReference Include="Markdig" Version="0.10.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.1" />
@@ -74,6 +75,7 @@
     <Content Include="wwwroot\less\about-theme.less" />
     <Content Include="wwwroot\less\base-theme.less" />
     <Content Include="wwwroot\less\blog-theme.less" />
+    <Content Include="wwwroot\less\code-theme.less" />
     <Content Include="wwwroot\less\error-theme.less" />
     <Content Include="wwwroot\less\experiments-theme.less" />
     <Content Include="wwwroot\less\home-theme.less" />

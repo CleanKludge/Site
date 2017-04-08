@@ -85,7 +85,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="menu-item @((Location)ViewData[nameof(Location)] == Location.Home ? "active" : "")"><a asp-controller="Home" asp-action="Index">Home</a></li>
-                <li class="menu-item @((Location)ViewData[nameof(Location)] == Location.Experiments ? "active" : "")"><a asp-controller="Content" asp-action="Posts" asp-all-route-data="@(new Dictionary<string, string> { { nameof(Location).ToLower(), Location.Experiments.ToString().ToLower() } })">Experiments</a></li>
+                <li class="menu-item @((Location)ViewData[nameof(Location)] == Location.Code ? "active" : "")"><a asp-controller="Content" asp-action="Posts" asp-all-route-data="@(new Dictionary<string, string> { { nameof(Location).ToLower(), Location.Code.ToString().ToLower() } })">Code</a></li>
                 <li class="menu-item @((Location)ViewData[nameof(Location)] == Location.Blog ? "active" : "")"><a asp-controller="Content" asp-action="Posts" asp-all-route-data="@(new Dictionary<string, string> { { nameof(Location).ToLower(), Location.Blog.ToString().ToLower() } })">Blog</a></li>
                 <li class="menu-item @((Location)ViewData[nameof(Location)] == Location.About ? "active" : "")"><a asp-controller="About" asp-action="Index">About</a></li>
             </ul>
@@ -103,14 +103,14 @@
         </div>
         <div class="row">
             <ul>
-                <li>Current build: v@(ViewBag.Version)</li>
+                <li>Current build: @(ViewBag.Version)</li>
                 <li>Powered by AspNetCore</li>
             </ul>
         </div>
         <div class="row">
             <ul class="nav navbar-nav">
                 <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                <li><a asp-controller="Content" asp-action="Posts" asp-all-route-data="@(new Dictionary<string, string> { { nameof(Location).ToLower(), Location.Experiments.ToString().ToLower() } })">Experiments</a></li>
+                <li><a asp-controller="Content" asp-action="Posts" asp-all-route-data="@(new Dictionary<string, string> { { nameof(Location).ToLower(), Location.Code.ToString().ToLower() } })">Code</a></li>
                 <li><a asp-controller="Content" asp-action="Posts" asp-all-route-data="@(new Dictionary<string, string> { { nameof(Location).ToLower(), Location.Blog.ToString().ToLower() } })">Blog</a></li>
                 <li><a asp-controller="About" asp-action="Index">About</a></li>
             </ul>

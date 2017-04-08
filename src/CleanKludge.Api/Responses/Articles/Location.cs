@@ -5,7 +5,7 @@ namespace CleanKludge.Api.Responses.Articles
         Error = 0,
         Unknown = 0,
         Home = 1,
-        Experiments = 2,
+        Code = 2,
         Blog = 3,
         About = 4,
         Account = 5

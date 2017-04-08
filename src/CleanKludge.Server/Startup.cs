@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CleanKludge.Data.File.Modules;
+using CleanKludge.Server.Filters;
 using CleanKludge.Services.Modules;
 using LightInject;
 using LightInject.Microsoft.DependencyInjection;
@@ -59,6 +60,7 @@ namespace CleanKludge.Server
                 });
 
                 options.Filters.Add(new ResponseCacheAttribute { CacheProfileName = "Default" });
+                options.Filters.Add(new SiteVersionAttribute(Configuration));
             });
 
             return new ServiceContainer()

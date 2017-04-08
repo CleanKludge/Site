@@ -18,8 +18,8 @@ namespace CleanKludge.Server.Extensions
                     return Core.Articles.Location.Blog;
                 case Location.Error:
                     return Core.Articles.Location.Error;
-                case Location.Experiments:
-                    return Core.Articles.Location.Experiments;
+                case Location.Code:
+                    return Core.Articles.Location.Code;
                 case Location.Home:
                     return Core.Articles.Location.Home;
                 default:
