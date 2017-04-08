@@ -1,10 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CleanKludge.Api.Responses.Articles;
 
 namespace CleanKludge.Core.Articles
 {
-    public class Summaries
+    public class Summaries : IEnumerable<ArticleSummary>
     {
         private readonly List<ArticleSummary> _articles;
 
@@ -13,7 +14,7 @@ namespace CleanKludge.Core.Articles
             return new Summaries(contentRepository.FetchAll().Select(ArticleSummary.From).ToList());
         }
 
-        private Summaries(List<ArticleSummary> articles)
+        public Summaries(List<ArticleSummary> articles)
         {
             _articles = articles;
         }
@@ -44,6 +45,16 @@ namespace CleanKludge.Core.Articles
             {
                 Summaries = _articles.Select(x => x.ToResponse()).ToList()
             };
+        }
+
+        public IEnumerator<ArticleSummary> GetEnumerator()
+        {
+            return _articles.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

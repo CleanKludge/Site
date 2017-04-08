@@ -6,7 +6,14 @@ using Microsoft.Extensions.Configuration;
 
 namespace CleanKludge.Data.File.Articles
 {
-    public class ArticlePath
+    public interface IArticlePath
+    {
+        IEnumerable<string> GetAll();
+        string LoadFor(ArticleIdentifier identifier);
+        string LoadFrom(string filePath);
+    }
+
+    public class ArticlePath : IArticlePath
     {
         private readonly string _extension;
         private readonly string _path;

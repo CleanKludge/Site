@@ -7,9 +7,9 @@ namespace CleanKludge.Data.File.Articles
     {
         private readonly IArticleSummaryRepository _summaryRepository;
         private readonly IMemoryCache _memoryCache;
-        private readonly ArticlePath _articlePath;
+        private readonly IArticlePath _articlePath;
 
-        public ArticleRepository(ArticlePath articlePath, IMemoryCache memoryCache, IArticleSummaryRepository summaryRepository)
+        public ArticleRepository(IArticlePath articlePath, IMemoryCache memoryCache, IArticleSummaryRepository summaryRepository)
         {
             _articlePath = articlePath;
             _memoryCache = memoryCache;

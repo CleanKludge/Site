@@ -35,5 +35,26 @@ namespace CleanKludge.Data.File.Articles
         [JsonProperty("location")]
         [JsonConverter(typeof(StringEnumConverter))]
         public Location Location { get; set; }
+
+        protected bool Equals(ArticleSummaryRecord other)
+        {
+            return Equals(Identifier, other.Identifier);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if(ReferenceEquals(null, obj))
+                return false;
+
+            if (ReferenceEquals(this, obj))
+                return true;
+
+            return obj.GetType() == GetType() && Equals((ArticleSummaryRecord)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Identifier != null ? Identifier.GetHashCode() : 0;
+        }
     }
 }
