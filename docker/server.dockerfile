@@ -12,6 +12,8 @@ COPY ./artifacts/server/ /home/docker/app/
 
 WORKDIR /home/docker/app
 
+ENV ASPNETCORE_ENVIRONMENT=Production
+
 # Copy the configuration
 COPY ./conf/supervisor.conf /home/docker/conf/supervisor.conf
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf

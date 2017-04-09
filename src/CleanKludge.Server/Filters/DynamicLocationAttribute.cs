@@ -7,7 +7,9 @@ namespace CleanKludge.Server.Filters
 {
     public class DynamicLocationAttribute : Attribute, IResultFilter
     {
-        private readonly Location _location;
+        private readonly Location? _location;
+
+        public DynamicLocationAttribute() { }
 
         public DynamicLocationAttribute(Location location)
         {
@@ -23,7 +25,7 @@ namespace CleanKludge.Server.Filters
 
             if(context.RouteData.Values.ContainsKey(nameof(Location).ToLower()) && Enum.TryParse(context.RouteData.Values[nameof(Location).ToLower()].ToString(), true, out Location location))
                 controller.ViewData[nameof(Location)] = location;
-            else if(string.IsNullOrWhiteSpace(controller.ViewBag.Section))
+            else if(_location.HasValue && string.IsNullOrWhiteSpace(controller.ViewBag.Section))
                 controller.ViewData[nameof(Location)] = _location;
         }
 
