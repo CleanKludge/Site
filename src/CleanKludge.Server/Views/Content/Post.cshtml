@@ -1,4 +1,5 @@
-﻿@using Markdig
+﻿@using CleanKludge.Api.Responses.Articles
+@using Markdig
 @using Microsoft.AspNetCore.Http.Extensions
 @model CleanKludge.Api.Responses.Articles.ArticleResponse
 @{
@@ -9,20 +10,23 @@
 
 @section scripts
 {
-    <script>
-        var disqus_config = function () {
-            this.page.url = '@Context.Request.GetDisplayUrl()';
-            this.page.identifier = '@Model.Summary.Identifier';
-            this.page.title = '@Model.Summary.Title'; 
-        };
-    
-        (function() { // DON'T EDIT BELOW THIS LINE
-        var d = document, s = d.createElement('script');
-        s.src = '//cleankludge.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-        })();
-    </script>
+    @if(Model.Summary.Location == Location.Blog)
+    {
+        <script>
+            var disqus_config = function() {
+                this.page.url = '@Context.Request.GetDisplayUrl()';
+                this.page.identifier = '@Model.Summary.Identifier';
+                this.page.title = '@Model.Summary.Title';
+            };
+
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = '//cleankludge.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    }
 }
 
 <section class="container-fluid">
@@ -44,14 +48,17 @@
     </div>
 </section>
 
-<section class="container">
-    <div class="row">
-        <h1 class="background-highlight2 col-sm-12">Comments</h1>
-    </div>
-    <div class="row">
-        <article class="col-sm-12">
-            <div id="disqus_thread"></div>
-            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        </article>
-    </div>
-</section>
+@if(Model.Summary.Location == Location.Blog)
+{
+    <section class="container">
+        <div class="row">
+            <h1 class="background-highlight2 col-sm-12">Comments</h1>
+        </div>
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="disqus_thread"></div>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            </article>
+        </div>
+    </section>
+}

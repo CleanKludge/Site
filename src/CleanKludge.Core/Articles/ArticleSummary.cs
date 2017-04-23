@@ -1,4 +1,5 @@
 ﻿using CleanKludge.Api.Responses.Articles;
+using CleanKludge.Core.Articles.Extensions;
 
 namespace CleanKludge.Core.Articles
 {
@@ -35,7 +36,7 @@ namespace CleanKludge.Core.Articles
         {
             return new SummaryResponse
             {
-                Area =_summary.Location.ToString(),
+                Location =_summary.Location.ToApiType(),
                 Identifier = _summary.Identifier?.ToString(),
                 Title = _summary.Title,
                 Created = _summary.Created,

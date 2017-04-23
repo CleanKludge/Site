@@ -60,7 +60,7 @@
                                     <li>
                                         <ul class="list-inline">
                                             <li>
-                                                <a asp-controller="Content" asp-action="Post" asp-all-route-data='@(new Dictionary<string, string> {{"reference", summary.Identifier.ToLower()}, {nameof(Location).ToLower(), summary.Area.ToLower()}})'>
+                                                <a asp-controller="Content" asp-action="Post" asp-all-route-data='@(new Dictionary<string, string> {{"reference", summary.Identifier.ToLower()}, {nameof(Location).ToLower(), summary.Location.ToString().ToLower()}})'>
                                                     @summary.Title
                                                 </a>
                                             </li>

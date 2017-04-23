@@ -5,7 +5,7 @@ namespace CleanKludge.Api.Responses.Articles
 {
     public class SummaryResponse
     {
-        public string Area { get; set; }
+        public Location Location { get; set; }
         public string Identifier { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
