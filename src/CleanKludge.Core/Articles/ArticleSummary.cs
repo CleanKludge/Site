@@ -1,4 +1,5 @@
-﻿using CleanKludge.Api.Responses.Articles;
+﻿using System.Collections.Generic;
+using CleanKludge.Api.Responses.Articles;
 using CleanKludge.Core.Articles.Extensions;
 
 namespace CleanKludge.Core.Articles
@@ -17,9 +18,9 @@ namespace CleanKludge.Core.Articles
             _summary = summary;
         }
 
-        public string KeyFor(Grouping grouping)
+        public IEnumerable<string> KeysFor(Grouping grouping)
         {
-            return grouping == Grouping.Date ? _summary.Created.ToString("MMM yyyy") : _summary.Tags[0];
+            return grouping == Grouping.Date ? new List<string>{ _summary.Created.ToString("MMM yyyy") } : _summary.Tags;
         }
 
         public bool In(Location location)

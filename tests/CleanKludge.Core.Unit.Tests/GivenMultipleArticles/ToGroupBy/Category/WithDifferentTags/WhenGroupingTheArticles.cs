@@ -37,9 +37,9 @@ namespace CleanKludge.Core.Unit.Tests.GivenMultipleArticles.ToGroupBy.Category.W
         }
 
         [TestMethod]
-        public void ThenThereAreTwoGroups()
+        public void ThenThereAreThreeGroups()
         {
-            Assert.IsTrue(_result.Groups[0].Count == 2);
+            Assert.IsTrue(_result.Groups[0].Count == 3);
         }
 
         [TestMethod]
@@ -51,7 +51,13 @@ namespace CleanKludge.Core.Unit.Tests.GivenMultipleArticles.ToGroupBy.Category.W
         [TestMethod]
         public void ThenThereIsAGroupForTheSecondTag()
         {
-            Assert.IsTrue(_result.Groups[0]["2"].Count == 1);
+            Assert.IsTrue(_result.Groups[0]["2"].Count == 2);
+        }
+
+        [TestMethod]
+        public void ThenThereIsAGroupForTheThirdTag()
+        {
+            Assert.IsTrue(_result.Groups[0]["3"].Count == 1);
         }
     }
 }

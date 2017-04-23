@@ -45,9 +45,9 @@ namespace CleanKludge.Core.Unit.Tests.GivenMultipleArticles.ToGroupBy.Category.W
         }
 
         [TestMethod]
-        public void ThenThereIsOneGroupInTheSecondRow()
+        public void ThenThereIsTwoGroupInTheSecondRow()
         {
-            Assert.IsTrue(_result.Groups[1].Count == 1);
+            Assert.IsTrue(_result.Groups[1].Count == 2);
         }
 
         [TestMethod]
@@ -59,7 +59,7 @@ namespace CleanKludge.Core.Unit.Tests.GivenMultipleArticles.ToGroupBy.Category.W
         [TestMethod]
         public void ThenThereIsAGroupForTheSecondTag()
         {
-            Assert.IsTrue(_result.Groups[0]["2"].Count == 1);
+            Assert.IsTrue(_result.Groups[0]["2"].Count == 2);
         }
     }
 }

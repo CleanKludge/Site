@@ -16,11 +16,14 @@ namespace CleanKludge.Core.Articles
 
             foreach (var item in articles)
             {
-                var key = item.KeyFor(grouping);
-                if (!result.ContainsKey(key))
-                    result.Add(key, new List<ArticleSummary>());
+                var keys = item.KeysFor(grouping);
+                foreach(var key in keys)
+                {
+                    if (!result.ContainsKey(key))
+                        result.Add(key, new List<ArticleSummary>());
 
-                result[key].Add(item);
+                    result[key].Add(item);
+                }
             }
 
             return new GroupedSummaries(result, grouping);

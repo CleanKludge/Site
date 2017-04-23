@@ -45,19 +45,14 @@
     @foreach (var summary in Model.Summaries)
     {
         <div class="row">
-            <a class="col-sm-12" title="@summary.Title" asp-controller="Content" asp-action="Post" asp-all-route-data="@(new Dictionary<string, string> { { nameof(Location).ToLower(), summary.Area.ToLower() }, { "reference", summary.Identifier.ToLower() } })">
+            <a class="col-sm-12" title="@summary.Title" asp-controller="Content" asp-action="Post" asp-all-route-data="@(new Dictionary<string, string> { { nameof(Location).ToLower(), summary.Location.ToString().ToLower() }, { "reference", summary.Identifier.ToLower() } })">
                 <h2 class="background-highlight clickable">@summary.Title</h2>
             </a>
         </div>
         <div class="row">
-            <p class="col-sm-12 text-center">
-                By @summary.Author on @summary.Created.ToString("dd/MM/yyyy")
-            </p>
-        </div>
-        <div class="row">
             <article class="col-sm-12">
                 <div>
-                    <p>@summary.Description</p>
+                    <p>@summary.Description <span class="col-sm-12 text-right">By @summary.Author on @summary.Created.ToString("dd/MM/yyyy")</span></p>
                 </div>
             </article>
         </div>
