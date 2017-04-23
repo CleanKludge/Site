@@ -14,7 +14,6 @@ html, body, .container-fluid {
 main {
     padding-top: 50px;
     margin-top:5px;
-    padding-bottom: 180px;
 }
 
 html {
@@ -63,18 +62,21 @@ ul {
 a {
     text-decoration: none;
     cursor: pointer;
-    display: block;
     font-weight: 400;
 }
 
 .content {
-    padding: 5px 20px 15px;
+    padding: 15px 20px 15px;
     background-color: #ffffff;
     border: 1px solid #ddd;
 
     h1, h2, h3, h4, h5, h6 {
         text-align: left;
         letter-spacing: normal;
+    }
+
+    ol {
+        padding-left: 20px;
     }
 }
 
@@ -131,6 +133,8 @@ inline {
 footer {
     text-align: center;
     padding-top: 20px;
+    bottom: 0;
+    left: 0;
     position: absolute;
     width: 100%;
 
@@ -227,7 +231,7 @@ ul.nav {
     }
 
     .col-content {
-        padding-left: 15px;
+        padding-left: 15px !important;
     }
 }
 
