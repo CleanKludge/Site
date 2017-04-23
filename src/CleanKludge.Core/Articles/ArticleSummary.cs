@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CleanKludge.Api.Responses.Articles;
+using CleanKludge.Core.Articles.Data;
 using CleanKludge.Core.Articles.Extensions;
 
 namespace CleanKludge.Core.Articles
@@ -44,6 +45,7 @@ namespace CleanKludge.Core.Articles
                 Description = _summary.Description,
                 Enabled = _summary.Enabled,
                 Tags = _summary.Tags,
+                Keywords = _summary.Keywords,
                 Author = _summary.Author
             };
         }

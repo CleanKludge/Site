@@ -1,4 +1,6 @@
-﻿namespace CleanKludge.Core.Articles
+﻿using CleanKludge.Core.Articles.Data;
+
+namespace CleanKludge.Core.Articles
 {
     public interface IArticleDto
     {

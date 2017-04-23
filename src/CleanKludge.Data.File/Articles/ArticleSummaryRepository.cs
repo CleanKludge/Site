@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using CleanKludge.Core.Articles;
+using CleanKludge.Core.Articles.Data;
 using CleanKludge.Data.File.Serializers;
 using Microsoft.Extensions.Caching.Memory;
 

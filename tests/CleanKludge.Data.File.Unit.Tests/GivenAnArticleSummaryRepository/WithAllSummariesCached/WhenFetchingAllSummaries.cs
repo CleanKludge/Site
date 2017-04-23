@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using CleanKludge.Core.Articles;
+using CleanKludge.Core.Articles.Data;
 using CleanKludge.Data.File.Articles;
 using CleanKludge.Data.File.Serializers;
 using Microsoft.Extensions.Caching.Memory;

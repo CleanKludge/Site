@@ -63,6 +63,7 @@ a {
     text-decoration: none;
     cursor: pointer;
     font-weight: 400;
+    display: inline;
 }
 
 .content {
@@ -77,6 +78,16 @@ a {
 
     ol {
         padding-left: 20px;
+    }
+
+    pre {
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+
+        .hljs {
+            background: #121212;
+        }
     }
 }
 
@@ -100,6 +111,11 @@ article {
     div ul {
         margin-left: 23px;
         list-style: disc;
+    }
+
+    div .list-none {
+        list-style: none;
+        margin-left: 0;
     }
 
     & > div {
@@ -232,6 +248,16 @@ ul.nav {
 
     .col-content {
         padding-left: 15px !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .summary-info {
+        display: none;
+    }
+
+    main {
+        padding-bottom: 20px;
     }
 }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CleanKludge.Core.Articles;
+using CleanKludge.Core.Articles.Data;
 using CleanKludge.Data.File.Articles.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -28,6 +29,9 @@ namespace CleanKludge.Data.File.Articles
 
         [JsonProperty("tags")]
         public List<string> Tags { get; set; }
+
+        [JsonProperty("keywords")]
+        public List<string> Keywords { get; set; }
 
         [JsonProperty("title")]
         public string Title { get; set; }

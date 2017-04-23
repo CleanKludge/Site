@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CleanKludge.Core.Articles.Data;
 
 namespace CleanKludge.Core.Articles
 {

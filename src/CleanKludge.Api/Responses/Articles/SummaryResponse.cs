@@ -11,6 +11,7 @@ namespace CleanKludge.Api.Responses.Articles
         public string Description { get; set; }
         public DateTimeOffset Created { get; set; }
         public List<string> Tags { get; set; }
+        public List<string> Keywords { get; set; }
         public string Author { get; set; }
         public bool Enabled { get; set; }
     }
