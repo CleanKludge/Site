@@ -4,7 +4,7 @@
 @model CleanKludge.Api.Responses.Articles.ArticleResponse
 @{
     ViewBag.Title = Model.Summary.Title;
-    ViewBag.Description = Model.Summary;
+    ViewBag.Description = Model.Summary.Description;
     ViewBag.Keywords = string.Join(",", Model.Summary.Keywords);
 }
 
