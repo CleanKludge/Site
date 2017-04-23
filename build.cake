@@ -24,14 +24,29 @@ Task("Build")
             Configuration = configuration
         };
 
-        foreach(var file in GetFiles("./src/*/*.csproj"))
+        foreach(var file in GetFiles("*.sln"))
         {
             DotNetCoreBuild(file.ToString(), settings);
         }
     });
 
-Task("Publish")
+Task("Test")
     .IsDependentOn("Build")
+    .Does(() =>
+    {
+        var settings = new DotNetCoreTestSettings
+        {
+            Configuration = configuration
+        };
+
+        foreach(var file in GetFiles("./tests/*/*.csproj"))
+        {
+            DotNetCoreTest(file.ToString(), settings);
+        }
+    });
+
+Task("Publish")
+    .IsDependentOn("Test")
     .Does(() =>
     {
         var settings = new DotNetCorePublishSettings

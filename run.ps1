@@ -100,7 +100,7 @@ try
         $arguments = BuildArgumentArray($myinvocation)
         $command = "$($myinvocation.mycommand.Path) $arguments"
         $workingDirectory = Split-Path $MyInvocation.MyCommand.Path -Parent
-        Start-Process -WorkingDirectory "$workingDirectory" -FilePath PowerShell -Verb runAs -Wait -ArgumentList "-NoLogo -NoExit -NoProfile -Command & {cd $($workingDirectory); $command}"
+        Start-Process -WorkingDirectory "$workingDirectory" -FilePath PowerShell -Verb runAs -Wait -ArgumentList "-NoLogo -NoProfile -Command & {cd $($workingDirectory); $command}"
         exit
     }
 
