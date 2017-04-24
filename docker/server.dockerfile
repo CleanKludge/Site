@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:1.1.0-runtime
+FROM microsoft/dotnet:1.1.1-runtime
 
 # Install the required applications
 RUN apt-get update --fix-missing && \
