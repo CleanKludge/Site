@@ -1,4 +1,5 @@
 ﻿using CleanKludge.Core.Articles;
+using CleanKludge.Core.Articles.Data;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace CleanKludge.Data.File.Articles

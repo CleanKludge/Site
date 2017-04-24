@@ -11,12 +11,12 @@ namespace CleanKludge.Data.File.Articles
     public class ArticleSummaryRepository : IArticleSummaryRepository
     {
         private readonly IMemoryCache _memoryCache;
-        private readonly IArticlePath _articlePath;
+        private readonly ISummaryPath _summaryPath;
         private readonly ISerializer _serializer;
 
-        public ArticleSummaryRepository(IArticlePath articlePath, IMemoryCache memoryCache, ISerializer serializer)
+        public ArticleSummaryRepository(ISummaryPath summaryPath, IMemoryCache memoryCache, ISerializer serializer)
         {
-            _articlePath = articlePath;
+            _summaryPath = summaryPath;
             _memoryCache = memoryCache;
             _serializer = serializer;
         }
@@ -26,7 +26,7 @@ namespace CleanKludge.Data.File.Articles
             if(_memoryCache.TryGetValue(MemoryCacheKey.ForSummary(identifier), out ArticleSummaryRecord articleRecord))
                 return articleRecord;
 
-            var data = _articlePath.LoadFor(identifier);
+            var data = _summaryPath.LoadFor(identifier);
             articleRecord = _serializer.Deserialize<ArticleSummaryRecord>(data);
             return _memoryCache.Set(MemoryCacheKey.ForSummary(identifier), articleRecord);
         }
@@ -37,13 +37,13 @@ namespace CleanKludge.Data.File.Articles
                 return records;
 
             records = new List<IArticleSummaryDto>();
-            foreach (var path in _articlePath.GetAll())
+            foreach (var path in _summaryPath.GetAll())
             {
                 var fileInfo = new FileInfo(path);
                 var articleIdentifier = ArticleIdentifier.From(fileInfo.Name);
                 if(!_memoryCache.TryGetValue(MemoryCacheKey.ForSummary(articleIdentifier), out ArticleSummaryRecord summaryRecord))
                 {
-                    summaryRecord = _serializer.Deserialize<ArticleSummaryRecord>(_articlePath.LoadFrom(path));
+                    summaryRecord = _serializer.Deserialize<ArticleSummaryRecord>(_summaryPath.LoadFrom(path));
                     _memoryCache.Set(MemoryCacheKey.ForSummary(summaryRecord.Identifier), summaryRecord);
                 }
 

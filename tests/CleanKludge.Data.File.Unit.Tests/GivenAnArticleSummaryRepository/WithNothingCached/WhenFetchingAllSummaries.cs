@@ -38,10 +38,10 @@ namespace CleanKludge.Data.File.Unit.Tests.GivenAnArticleSummaryRepository.WithN
             _memoryCache.Setup(x => x.CreateEntry(It.Is<object>(y => y.Equals("summaries.article1")))).Returns((object key) => _article1CacheEntry);
             _memoryCache.Setup(x => x.CreateEntry(It.Is<object>(y => y.Equals("summaries.article2")))).Returns((object key) => _article2CacheEntry);
 
-            var articlePath = new Mock<IArticlePath>();
-            articlePath.Setup(x => x.GetAll()).Returns(new List<string> { "article1", "article2" });
-            articlePath.Setup(x => x.LoadFrom("article1")).Returns("data1");
-            articlePath.Setup(x => x.LoadFrom("article2")).Returns("data2");
+            var summaryPath = new Mock<ISummaryPath>();
+            summaryPath.Setup(x => x.GetAll()).Returns(new List<string> { "article1", "article2" });
+            summaryPath.Setup(x => x.LoadFrom("article1")).Returns("data1");
+            summaryPath.Setup(x => x.LoadFrom("article2")).Returns("data2");
 
             _article1SummaryRecord = new ArticleSummaryRecord
             {
@@ -61,7 +61,7 @@ namespace CleanKludge.Data.File.Unit.Tests.GivenAnArticleSummaryRepository.WithN
             serializer.Setup(x => x.Deserialize<ArticleSummaryRecord>("data1")).Returns(_article1SummaryRecord);
             serializer.Setup(x => x.Deserialize<ArticleSummaryRecord>("data2")).Returns(_article2SummaryRecord);
 
-            var subject = new ArticleSummaryRepository(articlePath.Object, _memoryCache.Object, serializer.Object);
+            var subject = new ArticleSummaryRepository(summaryPath.Object, _memoryCache.Object, serializer.Object);
             _result = subject.FetchAll();
         }
 

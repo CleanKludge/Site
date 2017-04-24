@@ -38,7 +38,7 @@ namespace CleanKludge.Data.File.Unit.Tests.GivenAnArticleSummaryRepository.WithA
             _memoryCache = new Mock<IMemoryCache>();
             _memoryCache.Setup(x => x.TryGetValue("summaries", out _summariesCacheEntry)).Returns(true);
 
-            var subject = new ArticleSummaryRepository(new Mock<IArticlePath>().Object, _memoryCache.Object, new Mock<ISerializer>().Object);
+            var subject = new ArticleSummaryRepository(new Mock<ISummaryPath>().Object, _memoryCache.Object, new Mock<ISerializer>().Object);
             _result = subject.FetchAll();
         }
 

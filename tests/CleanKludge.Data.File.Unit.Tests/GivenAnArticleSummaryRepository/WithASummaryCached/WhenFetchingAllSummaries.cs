@@ -48,7 +48,7 @@ namespace CleanKludge.Data.File.Unit.Tests.GivenAnArticleSummaryRepository.WithA
             _memoryCache.Setup(x => x.CreateEntry(It.Is<object>(y => y.Equals("summaries")))).Returns((object key) => _summariesCacheEntry);
             _memoryCache.Setup(x => x.CreateEntry(It.Is<object>(y => y.Equals("summaries.article1")))).Returns((object key) => _article1CacheEntry);
 
-            var articlePath = new Mock<IArticlePath>();
+            var articlePath = new Mock<ISummaryPath>();
             articlePath.Setup(x => x.GetAll()).Returns(new List<string> { "article1", "article2" });
             articlePath.Setup(x => x.LoadFrom("article1")).Returns("data1");
 

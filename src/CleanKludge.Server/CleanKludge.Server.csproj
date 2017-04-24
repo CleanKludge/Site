@@ -6,6 +6,7 @@
     <OutputType>Exe</OutputType>
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
     <Version>1.0.0</Version>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
   <PropertyGroup>
     <UserSecretsId>f043b52d-bdd9-47a4-8b9a-da58f05a45c1</UserSecretsId>

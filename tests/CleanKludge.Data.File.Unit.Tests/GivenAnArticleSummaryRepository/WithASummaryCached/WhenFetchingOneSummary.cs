@@ -26,10 +26,10 @@ namespace CleanKludge.Data.File.Unit.Tests.GivenAnArticleSummaryRepository.WithA
             _memoryCache = new Mock<IMemoryCache>();
             _memoryCache.Setup(x => x.TryGetValue("summaries.identifier", out _articleSummaryRecord)).Returns(true);
 
-            var articlePath = new Mock<IArticlePath>();
-            articlePath.Setup(x => x.LoadFor(It.IsAny<ArticleIdentifier>())).Returns("data");
+            var summaryPath = new Mock<ISummaryPath>();
+            summaryPath.Setup(x => x.LoadFor(It.IsAny<ArticleIdentifier>())).Returns("data");
 
-            var subject = new ArticleSummaryRepository(articlePath.Object, _memoryCache.Object, new Mock<ISerializer>().Object);
+            var subject = new ArticleSummaryRepository(summaryPath.Object, _memoryCache.Object, new Mock<ISerializer>().Object);
             _result = subject.FetchOne(ArticleIdentifier.From("identifier"));
         }
 

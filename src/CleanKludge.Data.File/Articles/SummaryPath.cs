@@ -1,41 +1,54 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using CleanKludge.Core.Articles;
 using CleanKludge.Data.File.Errors;
 using Microsoft.Extensions.Configuration;
 
 namespace CleanKludge.Data.File.Articles
 {
-    public interface IArticlePath
+    public interface ISummaryPath
     {
+        IEnumerable<string> GetAll();
         string LoadFor(ArticleIdentifier identifier);
+        string LoadFrom(string filePath);
     }
 
-    public class ArticlePath : IArticlePath
+    public class SummaryPath : ISummaryPath
     {
         private readonly string _path;
 
-        public static ArticlePath For(IConfigurationRoot configuration)
+        public static SummaryPath For(IConfigurationRoot configuration)
         {
             var contentPath = Path.Combine(configuration["BasePath"], configuration["ArticlesPath"]);
 
             if (!Directory.Exists(contentPath))
                 throw ExceptionBecause.InvalidArticlePath(contentPath);
 
-            return new ArticlePath(contentPath);
+            return new SummaryPath(contentPath);
         }
 
-        private ArticlePath(string path)
+        private SummaryPath(string path)
         {
             _path = path;
         }
 
+        public IEnumerable<string> GetAll()
+        {
+            return Directory.GetFiles(_path, "*.json");
+        }
+
         public string LoadFor(ArticleIdentifier identifier)
         {
-            var filePath = $"{Path.Combine(_path, identifier.ToString())}.md";
+            var filePath = $"{Path.Combine(_path, identifier.ToString())}.json";
 
-            if(!System.IO.File.Exists(filePath))
+            if (!System.IO.File.Exists(filePath))
                 throw ExceptionBecause.ArticleNotFound(identifier);
 
+            return System.IO.File.ReadAllText(filePath);
+        }
+
+        public string LoadFrom(string filePath)
+        {
             return System.IO.File.ReadAllText(filePath);
         }
     }

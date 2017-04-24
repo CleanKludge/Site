@@ -1,4 +1,5 @@
 ﻿using CleanKludge.Core.Articles;
+using CleanKludge.Core.Articles.Data;
 
 namespace CleanKludge.Services.Content
 {

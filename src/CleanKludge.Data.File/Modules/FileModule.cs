@@ -1,4 +1,4 @@
-﻿using CleanKludge.Core.Articles;
+﻿using CleanKludge.Core.Articles.Data;
 using CleanKludge.Data.File.Articles;
 using CleanKludge.Data.File.Serializers;
 using Microsoft.Extensions.Caching.Memory;
@@ -14,8 +14,10 @@ namespace CleanKludge.Data.File.Modules
         {
             self.TryAddSingleton<IMemoryCache>(provider => new MemoryCache(new MemoryCacheOptions()));
             self.TryAddSingleton<ISerializer, JsonSerializer>();
-            self.TryAddSingleton<IArticleSummaryRepository>(c => new ArticleSummaryRepository(ArticlePath.ForSummaries(c.GetService<IConfigurationRoot>()), c.GetService<IMemoryCache>(), c.GetService<ISerializer>()));
-            self.TryAddSingleton<IArticleRepository>(c => new ArticleRepository(ArticlePath.ForContent(c.GetService<IConfigurationRoot>()), c.GetService<IMemoryCache>(), c.GetService<IArticleSummaryRepository>()));
+            self.TryAddSingleton<IArticlePath>(c => ArticlePath.For(c.GetService<IConfigurationRoot>()));
+            self.TryAddSingleton<ISummaryPath>(c => SummaryPath.For(c.GetService<IConfigurationRoot>()));
+            self.TryAddSingleton<IArticleSummaryRepository, ArticleSummaryRepository>();
+            self.TryAddSingleton<IArticleRepository, ArticleRepository>();
             return self;
         }
     }

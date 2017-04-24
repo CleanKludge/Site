@@ -27,8 +27,8 @@ namespace CleanKludge.Data.File.Unit.Tests.GivenAnArticleSummaryRepository.WithN
             _memoryCache.Setup(x => x.TryGetValue("summaries.identifier", out cachedRecord)).Returns(false);
             _memoryCache.Setup(x => x.CreateEntry(It.IsAny<object>())).Returns((object key) => _cacheEntry);
 
-            var articlePath = new Mock<IArticlePath>();
-            articlePath.Setup(x => x.LoadFor(It.IsAny<ArticleIdentifier>())).Returns("data");
+            var summaryPath = new Mock<ISummaryPath>();
+            summaryPath.Setup(x => x.LoadFor(It.IsAny<ArticleIdentifier>())).Returns("data");
 
             _articleSummaryRecord = new ArticleSummaryRecord
             {
@@ -38,7 +38,7 @@ namespace CleanKludge.Data.File.Unit.Tests.GivenAnArticleSummaryRepository.WithN
             var serializer = new Mock<ISerializer>();
             serializer.Setup(x => x.Deserialize<ArticleSummaryRecord>("data")).Returns(_articleSummaryRecord);
 
-            var subject = new ArticleSummaryRepository(articlePath.Object, _memoryCache.Object, serializer.Object);
+            var subject = new ArticleSummaryRepository(summaryPath.Object, _memoryCache.Object, serializer.Object);
             _result = subject.FetchOne(ArticleIdentifier.From("identifier"));
         }
 

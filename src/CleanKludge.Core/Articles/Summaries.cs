@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CleanKludge.Api.Responses.Articles;
+using CleanKludge.Core.Articles.Data;
 
 namespace CleanKludge.Core.Articles
 {

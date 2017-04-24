@@ -1,4 +1,4 @@
-﻿namespace CleanKludge.Core.Articles
+﻿namespace CleanKludge.Core.Articles.Data
 {
     public interface IArticleRepository
     {
