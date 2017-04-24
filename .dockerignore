@@ -1,7 +1,8 @@
-﻿tools/*
-src/*
-tests/*
-.vs*
+﻿.vs*
 *.ps1
 *.cake
 *.sln
+*.pdb
+*.less
+.git
+README.txt
