@@ -14,6 +14,7 @@ Task("DockerTag")
     });
 
 Task("DockerPush")
+    .IsDependentOn("DockerTag")
     .Does(() =>
     {
         DockerPush(string.Format("cleankludge/website:{0}", tag));
