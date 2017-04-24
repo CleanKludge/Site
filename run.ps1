@@ -190,10 +190,9 @@ try
     if($LASTEXITCODE -ne 0) {
         throw "Build failed."
     }
-    else {
-        Write-Host -ForegroundColor Green "Build finished succesfully."
-    }
-
+    
+    Write-Host -ForegroundColor Green "Build finished succesfully."
+    Write-Host "Press any key to continue..."
     Read-Host
     exit $LASTEXITCODE
 }
@@ -201,5 +200,6 @@ catch
 {
     Write-Host $_.Exception.GetType().FullName, $_.Exception.Message, $_.Exception.StackTrace
     Write-Host -ForegroundColor Red "Build Failed."
+    Write-Host "Press any key to continue..."
     Read-Host
 }
