@@ -4,6 +4,16 @@
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
+Teardown(context =>
+{
+    Information("Cleaning up old images...");
+    StartPowershellScript("docker", args =>
+        {
+            args.Append("rmi");
+            args.Append("$(docker images --quiet --filter dangling=true)");
+        });
+});
+
 Task("Restore")
     .Does(() =>
     {
