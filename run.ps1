@@ -194,6 +194,7 @@ try
         Write-Host -ForegroundColor Green "Build finished succesfully."
     }
 
+    Read-Host
     exit $LASTEXITCODE
 }
 catch
