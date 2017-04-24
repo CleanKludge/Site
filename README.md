@@ -11,6 +11,7 @@ git submodule update
 ## Building
 
 ```powershell
+git submodule update --remote ./src/CleanKludge.Server/wwwroot/articles
 ./run.ps1 build.cake
 ```
 
