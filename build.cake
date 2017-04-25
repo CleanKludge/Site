@@ -4,6 +4,12 @@
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
+Setup(context =>
+{
+    Information("Cleaning server artifacts...");
+    CleanDirectories("./artifacts/server");
+});
+
 Teardown(context =>
 {
     Information("Cleaning up old images...");
@@ -11,8 +17,10 @@ Teardown(context =>
         {
             args.Append("rmi");
             args.Append("$(docker images --quiet --filter dangling=true)");
+            args.Append("> $null");
         });
 });
+
 
 Task("Restore")
     .Does(() =>
