@@ -18,6 +18,12 @@ namespace CleanKludge.Server.Controllers
             _logger = logger;
         }
 
+        [HttpGet("")]
+        public IActionResult Index()
+        {
+            return View("InternalServerError");
+        }
+
         [HttpGet("{code}")]
         public IActionResult Index(HttpStatusCode code)
         {

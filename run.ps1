@@ -104,6 +104,10 @@ try
         exit
     }
 
+    if (!$Script.EndsWith(".cake")) {
+        $Script += ".cake"
+    }
+
     Write-Host "Preparing to run $Script..."
 
     $TOOLS_DIR = Join-Path $PSScriptRoot "tools"

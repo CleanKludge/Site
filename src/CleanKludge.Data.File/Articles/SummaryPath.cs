@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using CleanKludge.Core.Articles;
 using CleanKludge.Data.File.Errors;
 using Microsoft.Extensions.Configuration;
@@ -34,7 +35,7 @@ namespace CleanKludge.Data.File.Articles
 
         public IEnumerable<string> GetAll()
         {
-            return Directory.GetFiles(_path, "*.json");
+            return Directory.GetFiles(_path, "*.json").Select(x => x.ToLower());
         }
 
         public string LoadFor(ArticleIdentifier identifier)
@@ -44,12 +45,12 @@ namespace CleanKludge.Data.File.Articles
             if (!System.IO.File.Exists(filePath))
                 throw ExceptionBecause.ArticleNotFound(identifier);
 
-            return System.IO.File.ReadAllText(filePath);
+            return System.IO.File.ReadAllText(filePath.ToLower());
         }
 
         public string LoadFrom(string filePath)
         {
-            return System.IO.File.ReadAllText(filePath);
+            return System.IO.File.ReadAllText(filePath.ToLower());
         }
     }
 }

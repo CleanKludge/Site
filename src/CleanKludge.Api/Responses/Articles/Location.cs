@@ -3,7 +3,6 @@ namespace CleanKludge.Api.Responses.Articles
     public enum Location
     {
         Error = 0,
-        Unknown = 0,
         Home = 1,
         Code = 2,
         Blog = 3,

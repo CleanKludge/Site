@@ -15,14 +15,16 @@ COPY ./conf/supervisor.conf /home/docker/conf/supervisor.conf
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 COPY ./conf/proxy.conf /etc/nginx/proxy.conf
 
+# Create the log directory
+RUN mkdir -p /home/docker/logs
+
 # Copy the application
 COPY ./artifacts/server/ /home/docker/app/
 
 # Set the working directory
 WORKDIR /home/docker/app
 
-# Create the log directory
-RUN mkdir -p /home/docker/logs
+RUN mkdir -p /home/docker/app/logs
 
 # Expose the webserver port
 EXPOSE 80

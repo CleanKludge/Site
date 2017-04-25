@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Json;
@@ -22,12 +23,12 @@ namespace CleanKludge.Server
         public IHostingEnvironment HostingEnvironment { get; }
         public IConfigurationRoot Configuration { get; }
 
-        public Startup(IHostingEnvironment hostingEnvironment)
+        public Startup(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
         {
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .MinimumLevel.Information()
-                .WriteTo.RollingFile(new JsonFormatter(), "logs/log-{Date}.log", LogEventLevel.Information, 10485760, 2)
+                .WriteTo.RollingFile(new JsonFormatter(), "logs/log-{Date}.log", LogEventLevel.Error, 10485760, 2)
                 .CreateLogger();
 
             HostingEnvironment = hostingEnvironment;
@@ -38,6 +39,8 @@ namespace CleanKludge.Server
                 .AddJsonFile("appsettings.json", false, true)
                 .AddEnvironmentVariables()
                 .Build();
+
+            loggerFactory.AddSerilog();
         }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
@@ -71,6 +74,8 @@ namespace CleanKludge.Server
         {
             if(HostingEnvironment.IsDevelopment())
                 applicationBuilder.UseDeveloperExceptionPage();
+            else
+                applicationBuilder.UseExceptionHandler("/error");
 
             applicationBuilder.UseResponseCaching();
             applicationBuilder.UseStatusCodePagesWithRedirects("/error/{0}");

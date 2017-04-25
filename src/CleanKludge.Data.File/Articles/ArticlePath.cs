@@ -36,7 +36,7 @@ namespace CleanKludge.Data.File.Articles
             if(!System.IO.File.Exists(filePath))
                 throw ExceptionBecause.ArticleNotFound(identifier);
 
-            return System.IO.File.ReadAllText(filePath);
+            return System.IO.File.ReadAllText(filePath.ToLower());
         }
     }
 }
