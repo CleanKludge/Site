@@ -116,25 +116,25 @@
     @RenderBody()
 </main>
 <footer class="background-header container-fluid">
-        <div class="row">
-            <ul>
-                <li> © 2014 - @(DateTime.Now.Year) Stephen Phillips</li>
-            </ul>
-        </div>
-        <div class="row">
-            <ul>
-                <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a></li>
-                <li>This work is licensed under a <a class="inline" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a></li>
-            </ul>
-        </div>
-        <div class="row">
-            <ul class="nav navbar-nav">
-                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                <li><a asp-controller="Content" asp-action="Posts" asp-all-route-data="@(new Dictionary<string, string> { { nameof(Location).ToLower(), Location.Code.ToString().ToLower() } })">Code</a></li>
-                <li><a asp-controller="Content" asp-action="Posts" asp-all-route-data="@(new Dictionary<string, string> { { nameof(Location).ToLower(), Location.Blog.ToString().ToLower() } })">Blog</a></li>
-                <li><a asp-controller="About" asp-action="Index">About</a></li>
-            </ul>
-        </div>
+    <div class="row">
+        <ul class="nav navbar-nav">
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li><a asp-controller="Content" asp-action="Posts" asp-all-route-data="@(new Dictionary<string, string> { { nameof(Location).ToLower(), Location.Code.ToString().ToLower() } })">Code</a></li>
+            <li><a asp-controller="Content" asp-action="Posts" asp-all-route-data="@(new Dictionary<string, string> { { nameof(Location).ToLower(), Location.Blog.ToString().ToLower() } })">Blog</a></li>
+            <li><a asp-controller="About" asp-action="Index">About</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <ul>
+            <li> © 2014 - @(DateTime.Now.Year) Stephen Phillips</li>
+        </ul>
+    </div>
+    <div class="row">
+        <ul>
+            <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a></li>
+            <li>This work is licensed under a <a class="inline" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a></li>
+        </ul>
+    </div>
 </footer>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
         asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
