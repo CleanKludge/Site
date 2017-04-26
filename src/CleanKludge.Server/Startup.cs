@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CleanKludge.Data.File.Modules;
+using CleanKludge.Data.Git.Modules;
 using CleanKludge.Server.Filters;
 using CleanKludge.Services.Modules;
 using LightInject;
@@ -50,6 +51,7 @@ namespace CleanKludge.Server
 
             services.AddOptions();
             services.AddFileServices(Configuration);
+            services.AddGitServices(Configuration);
             services.AddSevices(Configuration);
             services.AddResponseCaching();
             services.AddMvc(options =>
@@ -75,7 +77,10 @@ namespace CleanKludge.Server
             if(HostingEnvironment.IsDevelopment())
                 applicationBuilder.UseDeveloperExceptionPage();
             else
+            {
                 applicationBuilder.UseExceptionHandler("/error");
+                applicationBuilder.LoadContent();
+            }
 
             applicationBuilder.UseResponseCaching();
             applicationBuilder.UseStatusCodePagesWithRedirects("/error/{0}");

@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanKludge.Core.Unit.Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanKludge.Data.File.Unit.Tests", "tests\CleanKludge.Data.File.Unit.Tests\CleanKludge.Data.File.Unit.Tests.csproj", "{846C5162-E4ED-484C-B8BD-9A6045AF8850}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanKludge.Data.Git", "src\CleanKludge.Data.Git\CleanKludge.Data.Git.csproj", "{7BA522BD-0BED-4051-AEDC-F10D6D35397A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,18 @@ Global
 		{846C5162-E4ED-484C-B8BD-9A6045AF8850}.Release|x64.Build.0 = Release|Any CPU
 		{846C5162-E4ED-484C-B8BD-9A6045AF8850}.Release|x86.ActiveCfg = Release|Any CPU
 		{846C5162-E4ED-484C-B8BD-9A6045AF8850}.Release|x86.Build.0 = Release|Any CPU
+		{7BA522BD-0BED-4051-AEDC-F10D6D35397A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BA522BD-0BED-4051-AEDC-F10D6D35397A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BA522BD-0BED-4051-AEDC-F10D6D35397A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7BA522BD-0BED-4051-AEDC-F10D6D35397A}.Debug|x64.Build.0 = Debug|Any CPU
+		{7BA522BD-0BED-4051-AEDC-F10D6D35397A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7BA522BD-0BED-4051-AEDC-F10D6D35397A}.Debug|x86.Build.0 = Debug|Any CPU
+		{7BA522BD-0BED-4051-AEDC-F10D6D35397A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BA522BD-0BED-4051-AEDC-F10D6D35397A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BA522BD-0BED-4051-AEDC-F10D6D35397A}.Release|x64.ActiveCfg = Release|Any CPU
+		{7BA522BD-0BED-4051-AEDC-F10D6D35397A}.Release|x64.Build.0 = Release|Any CPU
+		{7BA522BD-0BED-4051-AEDC-F10D6D35397A}.Release|x86.ActiveCfg = Release|Any CPU
+		{7BA522BD-0BED-4051-AEDC-F10D6D35397A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -142,5 +156,6 @@ Global
 		{52B267BC-579C-482F-806C-139DAD50B7E4} = {C810F127-D199-485E-A2C2-8DD345B9B5B2}
 		{34AFA6C3-76A4-4C16-AF9B-28B5B3716D34} = {C810F127-D199-485E-A2C2-8DD345B9B5B2}
 		{846C5162-E4ED-484C-B8BD-9A6045AF8850} = {C810F127-D199-485E-A2C2-8DD345B9B5B2}
+		{7BA522BD-0BED-4051-AEDC-F10D6D35397A} = {97762AE8-DB0B-4024-A0A5-49EE8CD23B5A}
 	EndGlobalSection
 EndGlobal

@@ -6,3 +6,5 @@
 *.less
 .git
 README.txt
+
+**/wwwroot/articles/**
