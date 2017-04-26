@@ -1,4 +1,0 @@
-[submodule "src/CleanKludge.Server/wwwroot/articles"]
-    path = src/CleanKludge.Server/wwwroot/articles
-    url = git@github.com:CleanKludge/Content.git
-    ignore = dirty
