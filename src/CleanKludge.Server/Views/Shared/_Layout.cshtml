@@ -61,16 +61,15 @@
             asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
             asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"/>
     <link rel="stylesheet" href="~/lib/fontawesome/css/font-awesome.min.css"/>
+
     @switch ((Location)ViewData[nameof(Location)])
     {
-        case Location.Blog:
-            <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/obsidian.min.css">
-            break;
         case Location.Code:
-            <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/darcula.min.css">
+        case Location.Blog:
+            <link href="~/css/prism-twilight.min.css" rel="stylesheet" />
             break;
         default:
-            <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/monokai-sublime.min.css">
+            <link href="~/css/prism-okaida.min.css" rel="stylesheet" />
             break;
     }
 
@@ -144,9 +143,7 @@
         asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
         asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
 </script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
+<script src="~/js/prism.min.js" data-default-language="csharp"></script>
 @RenderSection("scripts", false)
 </body>
 </html>

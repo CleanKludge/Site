@@ -21,10 +21,10 @@ gulp.task("clean:css", function (cb) {
 });
 
 gulp.task("min:js", function () {
-    return gulp.src([bundles.Js.Source, "!" + bundles.Js.Minified], { base: "." })
-        .pipe(concat(bundles.Js.Destination))
+    return gulp.src([bundles.Js.Source, "!" + bundles.Js.Minified])
         .pipe(uglify())
-        .pipe(gulp.dest("."));
+        .pipe(rename({ suffix: ".min" }))
+        .pipe(gulp.dest(bundles.Js.Destination));
 });
 
 gulp.task("min:css", function () {

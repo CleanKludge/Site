@@ -65,6 +65,9 @@
     <None Remove="logs\**" />
   </ItemGroup>
   <ItemGroup>
+    <Content Remove="wwwroot/prism.css" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="wwwroot\articles\test-disabled.json" />
     <Content Include="wwwroot\articles\test.json" />
     <Content Include="wwwroot\articles\test.md" />
