@@ -1,5 +1,4 @@
-﻿using CleanKludge.Core.Articles;
-using CleanKludge.Core.Articles.Data;
+﻿using CleanKludge.Core.Articles.Data;
 
 namespace CleanKludge.Data.File.Articles
 {

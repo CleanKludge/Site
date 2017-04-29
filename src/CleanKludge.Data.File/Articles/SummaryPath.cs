@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using CleanKludge.Core.Articles;
 using CleanKludge.Data.File.Errors;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace CleanKludge.Data.File.Articles
 {
@@ -18,9 +18,10 @@ namespace CleanKludge.Data.File.Articles
     {
         private readonly string _path;
 
-        public static SummaryPath For(IConfigurationRoot configuration)
+        public static SummaryPath For(IOptions<ContentOptions> options)
         {
-            var contentPath = Path.Combine(configuration["BasePath"], configuration["ArticlesPath"]);
+            var optionsValue = options.Value ?? new ContentOptions();
+            var contentPath = Path.Combine(optionsValue.BasePath, optionsValue.ArticlesPath);
 
             if (!Directory.Exists(contentPath))
                 throw ExceptionBecause.InvalidArticlePath(contentPath);

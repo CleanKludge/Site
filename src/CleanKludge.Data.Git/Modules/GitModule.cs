@@ -10,7 +10,7 @@ namespace CleanKludge.Data.Git.Modules
     {
         public static IServiceCollection AddGitServices(this IServiceCollection self, IConfigurationRoot configuration)
         {
-            self.TryAddSingleton(provider => ContentRepository.For(configuration));
+            self.TryAddSingleton<ContentRepository>();
             return self;
         }
 

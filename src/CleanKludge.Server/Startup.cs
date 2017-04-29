@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using CleanKludge.Core.Modules;
 using CleanKludge.Data.File.Modules;
 using CleanKludge.Data.Git.Modules;
+using CleanKludge.Server.Authorization.Modules;
 using CleanKludge.Server.Filters;
 using CleanKludge.Services.Modules;
 using LightInject;
@@ -26,21 +28,26 @@ namespace CleanKludge.Server
 
         public Startup(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
         {
-            Log.Logger = new LoggerConfiguration()
-                .Enrich.FromLogContext()
-                .MinimumLevel.Information()
-                .WriteTo.RollingFile(new JsonFormatter(), "logs/log-{Date}.log", LogEventLevel.Error, 10485760, 2)
-                .CreateLogger();
-
             HostingEnvironment = hostingEnvironment;
 
             Configuration = new ConfigurationBuilder()
                 .SetBasePath(hostingEnvironment.ContentRootPath)
-                .AddInMemoryCollection(new [] { new KeyValuePair<string, string>("BasePath", hostingEnvironment.ContentRootPath) })
+                .AddInMemoryCollection(new[] { new KeyValuePair<string, string>("BasePath", hostingEnvironment.ContentRootPath) })
                 .AddJsonFile("appsettings.json", false, true)
                 .AddEnvironmentVariables()
                 .Build();
 
+            var minimumLogLevel = Configuration.GetValue("MinimumLogLevel", LogEventLevel.Error);
+
+           var loggingConfigurtion = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .MinimumLevel.Information()
+                .WriteTo.RollingFile(new JsonFormatter(), "logs/log-{Date}.log", minimumLogLevel, 10485760, 2);
+
+            if(Configuration.GetValue("EnableConsoleLogging", false))
+                loggingConfigurtion.WriteTo.LiterateConsole(minimumLogLevel);
+
+            Log.Logger = loggingConfigurtion.CreateLogger();
             loggerFactory.AddSerilog();
         }
 
@@ -50,7 +57,8 @@ namespace CleanKludge.Server
             services.TryAddSingleton(Log.Logger);
 
             services.AddOptions();
-            services.AddFileServices(Configuration);
+            services.AddCoreServices(Configuration);
+            services.AddFileServices();
             services.AddGitServices(Configuration);
             services.AddSevices(Configuration);
             services.AddResponseCaching();
@@ -63,10 +71,12 @@ namespace CleanKludge.Server
                     VaryByQueryKeys = new []{ "groupBy" },
                     Duration = 60
                 });
-
+                
                 options.Filters.Add(new ResponseCacheAttribute { CacheProfileName = "Default" });
                 options.Filters.Add(new SiteVersionAttribute(Configuration));
             });
+
+            services.AddAuthorizations(Configuration);
 
             return new ServiceContainer()
                 .CreateServiceProvider(services);

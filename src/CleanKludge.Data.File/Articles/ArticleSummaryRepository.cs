@@ -55,5 +55,33 @@ namespace CleanKludge.Data.File.Articles
                 .Set(MemoryCacheKey.Summaries(), records)
                 .ToList();
         }
+
+        public void Clear()
+        {
+            var hadSummaries = _memoryCache.TryGetValue(MemoryCacheKey.Summaries(), out IList<IArticleSummaryDto> oldSummaries);
+
+            var newSummaries = new List<IArticleSummaryDto>();
+            foreach (var path in _summaryPath.GetAll())
+            {
+                var summaryRecord = _serializer.Deserialize<ArticleSummaryRecord>(_summaryPath.LoadFrom(path));
+                _memoryCache.Set(MemoryCacheKey.ForSummary(summaryRecord.Identifier), summaryRecord);
+
+                if (summaryRecord.Enabled)
+                    newSummaries.Add(summaryRecord);
+            }
+
+            _memoryCache.Set(MemoryCacheKey.Summaries(), newSummaries);
+
+            if(!hadSummaries)
+                return;
+
+            foreach (var oldSummary in oldSummaries)
+            {
+                if(newSummaries.Any(x => x.Identifier.Equals(oldSummary.Identifier)))
+                    continue;
+
+                _memoryCache.Remove(MemoryCacheKey.ForSummary(oldSummary.Identifier));
+            }
+        }
     }
 }
