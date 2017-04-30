@@ -15,6 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="System.Xml.XmlSerializer">
+      <HintPath>C:\Users\Korthax\.nuget\packages\system.xml.xmlserializer\4.0.11\ref\netstandard1.3\System.Xml.XmlSerializer.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
 

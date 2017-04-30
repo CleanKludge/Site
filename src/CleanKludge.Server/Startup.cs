@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml;
 using CleanKludge.Core.Modules;
 using CleanKludge.Data.File.Modules;
 using CleanKludge.Data.Git.Modules;
@@ -11,6 +12,7 @@ using LightInject.Microsoft.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -77,6 +79,8 @@ namespace CleanKludge.Server
                 
                 options.Filters.Add(new ResponseCacheAttribute { CacheProfileName = "Default" });
                 options.Filters.Add(new SiteVersionAttribute(Configuration));
+
+                options.OutputFormatters.Add(new XmlSerializerOutputFormatter(new XmlWriterSettings { NamespaceHandling = NamespaceHandling.OmitDuplicates }));
             });
 
             services.AddAuthorizations(Configuration);

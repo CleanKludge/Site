@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CleanKludge.Api.Responses.Articles;
+using CleanKludge.Api.Responses.Feed;
 using CleanKludge.Core.Articles.Data;
 
 namespace CleanKludge.Core.Articles
@@ -45,6 +47,21 @@ namespace CleanKludge.Core.Articles
             return new SummariesResponse
             {
                 Summaries = _articles.Select(x => x.ToResponse()).ToList()
+            };
+        }
+
+        public Feed ToFeed(string serverUri)
+        {
+            return new Feed
+            {
+                Channel = new Channel
+                {
+                    Title = "CleanKludge",
+                    Link = serverUri,
+                    Description = "Random acts of coding.",
+                    Copyright = $"© 2014 - {DateTime.Now.Year} Stephen Phillips",
+                    Items = _articles.Select(x => x.ToFeedItem(serverUri)).ToList()
+                }
             };
         }
 

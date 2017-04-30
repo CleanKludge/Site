@@ -1,4 +1,5 @@
-﻿using CleanKludge.Core.Articles;
+﻿using CleanKludge.Api.Responses.Feed;
+using CleanKludge.Core.Articles;
 using CleanKludge.Core.Articles.Data;
 
 namespace CleanKludge.Services.Content
@@ -23,6 +24,12 @@ namespace CleanKludge.Services.Content
         {
             return Summaries.AllFrom(_articleSummaryRepository)
                 .GetLatest(5);
+        }
+
+        public Feed Feed(string serverUri)
+        {
+            return Summaries.AllFrom(_articleSummaryRepository)
+                .ToFeed(serverUri);
         }
 
         public GroupedSummaries Grouped(Grouping grouping, Location location)

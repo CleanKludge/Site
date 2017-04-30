@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CleanKludge.Api.Responses.Articles;
+using CleanKludge.Api.Responses.Feed;
 using CleanKludge.Core.Articles.Data;
 using CleanKludge.Core.Articles.Extensions;
 
@@ -47,6 +48,18 @@ namespace CleanKludge.Core.Articles
                 Tags = _summary.Tags,
                 Keywords = _summary.Keywords,
                 Author = _summary.Author
+            };
+        }
+
+        public FeedItem ToFeedItem(string serverUri)
+        {
+            return new FeedItem
+            {
+                Link = $"{serverUri}/{_summary.Location}/{_summary.Identifier}",
+                Title = _summary.Title,
+                Description = _summary.Description,
+                Author = _summary.Author,
+                PublishDate = _summary.Created.ToString("ddd, dd MMM yyyy HH:mm:ss ") + _summary.Created.ToString("zzz").Replace(":", "")
             };
         }
     }
