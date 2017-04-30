@@ -18,6 +18,7 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Json;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace CleanKludge.Server
 {
@@ -45,10 +46,12 @@ namespace CleanKludge.Server
                 .WriteTo.RollingFile(new JsonFormatter(), "logs/log-{Date}.log", minimumLogLevel, 10485760, 2);
 
             if(Configuration.GetValue("EnableConsoleLogging", false))
+            {
                 loggingConfigurtion.WriteTo.LiterateConsole(minimumLogLevel);
+                loggerFactory.AddConsole(LogLevel.Error);
+            }
 
             Log.Logger = loggingConfigurtion.CreateLogger();
-            loggerFactory.AddSerilog();
         }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)

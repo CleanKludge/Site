@@ -25,10 +25,12 @@ git submodule update --remote ./src/CleanKludge.Server/wwwroot/articles
 ### Locally
 
 ```powershell
-docker run -d -p 5080:80 --name website cleankludge/website:unstable
+docker kill $(docker ps -q); docker rm $(docker ps -a -q)
+
+docker run -d -p 5080:80 -e "ContentRepositoryUri=https://github.com/CleanKludge/Content.git"  -e "MinimumLogLevel=Information" -e "EnableConsoleLogging=true" --name website cleankludge/website:unstable
 ```
 
 ### Remote
 ```powershell
-docker run -d -p 80:80 --name website cleankludge/website:<tag>
+docker run -d -p 80:80  -e "ContentRepositoryUri=<value>" -e "GitHubToken=<value>" -e "GitName=<value>" -e "GitEmail=<value>"  --name website cleankludge/website:<tag>
 ```

@@ -36,7 +36,14 @@ namespace CleanKludge.Data.Git.Articles
 
         public void Clone()
         {
-            Repository.Clone(_contentRepositoryUri, _contentPath);
+            try
+            {
+                Repository.Clone(_contentRepositoryUri, _contentPath);
+            }
+            catch(Exception exception)
+            {
+                _logger.Error(exception, "Failed to clone repository {@ContentRepositoryUri} at {@ContentPath}.", _contentRepositoryUri, _contentPath);
+            }
         }
 
         public void Pull(GitCredentials credentials)

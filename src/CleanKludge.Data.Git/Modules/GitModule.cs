@@ -1,8 +1,11 @@
-﻿using CleanKludge.Data.Git.Articles;
+﻿using CleanKludge.Core.Articles;
+using CleanKludge.Data.Git.Articles;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
+using Serilog;
 
 namespace CleanKludge.Data.Git.Modules
 {
@@ -10,7 +13,8 @@ namespace CleanKludge.Data.Git.Modules
     {
         public static IServiceCollection AddGitServices(this IServiceCollection self, IConfigurationRoot configuration)
         {
-            self.TryAddSingleton<ContentRepository>();
+            self.Configure<GitOptions>(configuration);
+            self.TryAddSingleton(c => ContentRepository.For(c.GetService<IOptions<ContentOptions>>(), c.GetService<IOptions<GitOptions>>(), c.GetService<ILogger>()));
             return self;
         }
 
