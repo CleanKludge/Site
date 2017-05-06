@@ -11,6 +11,7 @@ using LightInject;
 using LightInject.Microsoft.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
@@ -64,7 +65,13 @@ namespace CleanKludge.Server
             services.AddOptions();
             services.AddCoreServices(Configuration);
             services.AddFileServices();
-            services.AddGitServices(Configuration);
+
+            if (HostingEnvironment.IsDevelopment())
+                services.AddNullGitServices(Configuration);
+            else
+                services.AddGitServices(Configuration);
+
+
             services.AddSevices(Configuration);
             services.AddResponseCaching();
             services.AddMvc(options =>
@@ -96,9 +103,16 @@ namespace CleanKludge.Server
             else
             {
                 applicationBuilder.UseExceptionHandler("/error");
-                applicationBuilder.LoadContent();
             }
 
+            applicationBuilder.LoadContent();
+            applicationBuilder.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AutomaticChallenge = true,
+                AutomaticAuthenticate = false,
+                LoginPath = new PathString("/error/403/"),
+                AccessDeniedPath = new PathString("/error/403/")
+            });
             applicationBuilder.UseResponseCaching();
             applicationBuilder.UseStatusCodePagesWithRedirects("/error/{0}");
             applicationBuilder.UseStaticFiles();

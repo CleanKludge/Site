@@ -20,6 +20,8 @@ namespace CleanKludge.Core.Articles.Extensions
                     return Api.Responses.Articles.Location.Code;
                 case Location.Home:
                     return Api.Responses.Articles.Location.Home;
+                case Location.Webhook:
+                    return Api.Responses.Articles.Location.Webhook;
                 default:
                     throw ExceptionBecause.UnknownSection(self);
             }

@@ -21,6 +21,7 @@ namespace CleanKludge.Server.Controllers
         [HttpGet("")]
         public IActionResult Index()
         {
+            Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             return View("InternalServerError");
         }
 
@@ -29,13 +30,18 @@ namespace CleanKludge.Server.Controllers
         {
             _logger.Information("[{statusCode}] {uri}", code, Request.GetDisplayUrl());
 
-           switch (code)
-           {
-               case HttpStatusCode.NotFound:
-                   return View("PageNotFound");
-               default:
-                   return View("InternalServerError");
-           }
+            Response.StatusCode = (int)code;
+            switch(code)
+            {
+                case HttpStatusCode.NotFound:
+                    return View("PageNotFound");
+                case HttpStatusCode.Unauthorized:
+                    return View("Unauthorized");
+                case HttpStatusCode.Forbidden:
+                    return View("Forbidden");
+                default:
+                    return View("InternalServerError");
+            }
         }
     }
 }

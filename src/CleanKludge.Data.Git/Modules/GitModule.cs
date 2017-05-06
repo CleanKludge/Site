@@ -11,17 +11,24 @@ namespace CleanKludge.Data.Git.Modules
 {
     public static class GitModule
     {
+        public static IServiceCollection AddNullGitServices(this IServiceCollection self, IConfigurationRoot configuration)
+        {
+            self.Configure<GitOptions>(configuration);
+            self.TryAddSingleton<IContentRepository, NullContentRepository>();
+            return self;
+        }
+
         public static IServiceCollection AddGitServices(this IServiceCollection self, IConfigurationRoot configuration)
         {
             self.Configure<GitOptions>(configuration);
-            self.TryAddSingleton(c => ContentRepository.For(c.GetService<IOptions<ContentOptions>>(), c.GetService<IOptions<GitOptions>>(), c.GetService<ILogger>()));
+            self.TryAddSingleton<IContentRepository>(c => ContentRepository.For(c.GetService<IOptions<ContentOptions>>(), c.GetService<IOptions<GitOptions>>(), c.GetService<ILogger>()));
             return self;
         }
 
         public static IApplicationBuilder LoadContent(this IApplicationBuilder self)
         {
             self.ApplicationServices
-                .GetService<ContentRepository>()
+                .GetService<IContentRepository>()
                 ?.Clone();
 
             return self;

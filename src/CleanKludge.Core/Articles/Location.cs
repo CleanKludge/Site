@@ -8,6 +8,7 @@ namespace CleanKludge.Core.Articles
         Code = 2,
         Blog = 3,
         About = 4,
-        Account = 5
+        Account = 5,
+        Webhook = 6,
     }
 }

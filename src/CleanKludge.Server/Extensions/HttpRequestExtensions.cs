@@ -19,5 +19,20 @@ namespace CleanKludge.Server.Extensions
                 return body;
             }
         }
+
+        public static async Task<byte[]> ReadAsByteArrayAsync(this HttpRequest self)
+        {
+            if (self.Body == null || self.Body == Stream.Null)
+                return null;
+
+            using (var bodyReader = new MemoryStream())
+            {
+                await self.Body.CopyToAsync(bodyReader);
+
+                var byteArray = bodyReader.ToArray();
+                self.Body = new MemoryStream(byteArray);
+                return byteArray;
+            }
+        }
     }
 }

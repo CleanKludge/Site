@@ -1,4 +1,4 @@
-﻿using System.Text;
+﻿using System;
 
 namespace CleanKludge.Server.Extensions
 {
@@ -6,11 +6,8 @@ namespace CleanKludge.Server.Extensions
     {
         public static string ToHexString(this byte[] self)
         {
-            var builder = new StringBuilder(self.Length * 2);
-            foreach (var b in self)
-                builder.AppendFormat("{0:x2}", b);
-
-            return builder.ToString();
+            var hex = BitConverter.ToString(self);
+            return hex.Replace("-", "");
         }
     }
 }

@@ -13,8 +13,7 @@
             "launchBrowser": true,
             "environmentVariables": {
                 "ASPNETCORE_ENVIRONMENT": "Development",
-                "USERNAME": "stephenneilphillips@gmail.com",
-                "PASSWORD_HASH": "AQAAAAEAACcQAAAAEI3vAjYNHBfoPE0GSE2DruIcCgoDaj5GpmbccMqYp003qr73OWEOq1VpJzbjHf1kRA=="
+                "GitHubToken": "dsgdgfdg"
             }
         },
         "CleanKludge.Server": {
@@ -22,8 +21,7 @@
             "launchUrl": "http://localhost:5000",
             "environmentVariables": {
                 "ASPNETCORE_ENVIRONMENT": "Development",
-                "USERNAME": "stephenneilphillips@gmail.com",
-                "PASSWORD_HASH": "AQAAAAEAACcQAAAAEI3vAjYNHBfoPE0GSE2DruIcCgoDaj5GpmbccMqYp003qr73OWEOq1VpJzbjHf1kRA=="
+                "GitHubToken": "dsgdgfdg"
             }
         }
     }

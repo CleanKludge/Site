@@ -1,18 +1,27 @@
 ﻿using CleanKludge.Api.Responses.Feed;
 using CleanKludge.Core.Articles;
 using CleanKludge.Core.Articles.Data;
+using CleanKludge.Data.Git.Articles;
 
 namespace CleanKludge.Services.Content
 {
     public class ContentService
     {
         private readonly IArticleSummaryRepository _articleSummaryRepository;
+        private readonly IContentRepository _contentRepository;
         private readonly IArticleRepository _articleRepository;
 
-        public ContentService(IArticleSummaryRepository articleSummaryRepository, IArticleRepository articleRepository)
+        public ContentService(IArticleSummaryRepository articleSummaryRepository, IArticleRepository articleRepository, IContentRepository contentRepository)
         {
             _articleSummaryRepository = articleSummaryRepository;
             _articleRepository = articleRepository;
+            _contentRepository = contentRepository;
+        }
+
+        public void UpdateAll(GitCredentials credentials)
+        {
+            _contentRepository.Pull(credentials);
+            _articleSummaryRepository.Clear();
         }
 
         public Article For(ArticleIdentifier reference)

@@ -15,6 +15,7 @@
   <ItemGroup>
     <PackageReference Include="LightInject.Microsoft.DependencyInjection" Version="2.0.1" />
     <PackageReference Include="Markdig" Version="0.10.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Xml" Version="1.1.2" />
@@ -72,6 +73,9 @@
     <Content Include="wwwroot\articles\test-disabled.json" />
     <Content Include="wwwroot\articles\test.json" />
     <Content Include="wwwroot\articles\test.md" />
+    <Content Include="wwwroot\less\about-theme - Copy.less">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="wwwroot\less\about-theme.less" />
     <Content Include="wwwroot\less\base-theme.less" />
     <Content Include="wwwroot\less\blog-theme.less" />
@@ -79,6 +83,7 @@
     <Content Include="wwwroot\less\error-theme.less" />
     <Content Include="wwwroot\less\home-theme.less" />
     <Content Include="wwwroot\less\site.less" />
+    <Content Include="wwwroot\less\webhook-theme.less" />
     <Content Include="wwwroot\robots.txt" />
   </ItemGroup>
   <ItemGroup>

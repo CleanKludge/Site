@@ -13,6 +13,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CleanKludge.Api\CleanKludge.Api.csproj" />
     <ProjectReference Include="..\CleanKludge.Core\CleanKludge.Core.csproj" />
+    <ProjectReference Include="..\CleanKludge.Data.Git\CleanKludge.Data.Git.csproj" />
   </ItemGroup>
 </Project>

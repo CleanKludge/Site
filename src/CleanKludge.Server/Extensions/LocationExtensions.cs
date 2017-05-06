@@ -21,6 +21,8 @@ namespace CleanKludge.Server.Extensions
                     return Core.Articles.Location.Code;
                 case Location.Home:
                     return Core.Articles.Location.Home;
+                case Location.Webhook:
+                    return Core.Articles.Location.Webhook;
                 default:
                     throw ExceptionBecause.UnknownLocation(self);
             }

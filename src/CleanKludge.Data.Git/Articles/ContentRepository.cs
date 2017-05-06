@@ -7,7 +7,13 @@ using CleanKludge.Core.Articles;
 
 namespace CleanKludge.Data.Git.Articles
 {
-    public class ContentRepository
+    public interface IContentRepository
+    {
+        void Clone();
+        void Pull(GitCredentials credentials);
+    }
+
+    public class ContentRepository : IContentRepository
     {
         private readonly string _contentRepositoryUri;
         private readonly GitCredentials _credentials;
