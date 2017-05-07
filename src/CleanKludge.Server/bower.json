@@ -8,8 +8,7 @@
     "jquery-validation-unobtrusive": "3.2.6",
     "autosize": "3.0.20",
     "fontawesome": "4.7.0",
-    "prismjs": "1.6.0",
-    "gulp": "v3.9.1"
+    "prismjs": "1.6.0"
   },
   "resolutions": {
     "jquery-validation": "1.16.0",

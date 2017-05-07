@@ -9,6 +9,7 @@ namespace CleanKludge.Server.Controllers
 {
     [Route("error")]
     [DynamicLocation(Location.Error)]
+    [ResponseCache(CacheProfileName = "None")]
     public class ErrorController : Controller
     {
         private readonly ILogger _logger;

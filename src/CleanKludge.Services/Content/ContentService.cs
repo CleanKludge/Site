@@ -30,7 +30,7 @@ namespace CleanKludge.Services.Content
 
         public Article For(ArticleIdentifier reference)
         {
-            return Article.LoadFrom(_articleRepository, reference);
+            return Article.LoadFrom(_articleSummaryRepository, _articleRepository, reference);
         }
 
         public Summaries Latest()

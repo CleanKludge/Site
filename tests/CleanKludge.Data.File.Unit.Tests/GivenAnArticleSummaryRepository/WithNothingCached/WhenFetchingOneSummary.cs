@@ -5,7 +5,7 @@ using CleanKludge.Data.File.Serializers;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-
+using Serilog;
 using CacheEntry = CleanKludge.Data.File.Unit.Tests.Framework.CacheEntry;
 
 namespace CleanKludge.Data.File.Unit.Tests.GivenAnArticleSummaryRepository.WithNothingCached
@@ -38,7 +38,7 @@ namespace CleanKludge.Data.File.Unit.Tests.GivenAnArticleSummaryRepository.WithN
             var serializer = new Mock<ISerializer>();
             serializer.Setup(x => x.Deserialize<ArticleSummaryRecord>("data")).Returns(_articleSummaryRecord);
 
-            var subject = new ArticleSummaryRepository(summaryPath.Object, _memoryCache.Object, serializer.Object);
+            var subject = new ArticleSummaryRepository(summaryPath.Object, _memoryCache.Object, serializer.Object, new Mock<IArticleRepository>().Object, new Mock<ILogger>().Object);
             _result = subject.FetchOne(ArticleIdentifier.From("identifier"));
         }
 

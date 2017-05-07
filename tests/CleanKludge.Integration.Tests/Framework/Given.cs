@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using StoryTests.Prologs;
@@ -39,6 +40,25 @@ namespace CleanKludge.Integration.Tests.Framework
             var testHost = new TestServer(webHostBuilder);
             var httpClient = testHost.CreateClient();
             return new ThreePointProlog<HttpClient, FakeSummaryPath, FakeArticlePath>(httpClient, fakeSummaryPath, fakeArticlePath);
+        }
+
+        public static IStoryProlog<HttpClient, FakeSummaryPath, FakeArticlePath, FakeInMemoryCache> AHttpClientWithInMemoryCache()
+        {
+            var fakeArticlePath = new FakeArticlePath();
+            var fakeSummaryPath = new FakeSummaryPath();
+            var inMemoryCache = new FakeInMemoryCache();
+
+            var hostBuilder = new WebHostBuilder();
+            var webHostBuilder = hostBuilder
+                .ConfigureServices(x => x.AddSingleton<IArticlePath>(fakeArticlePath))
+                .ConfigureServices(x => x.AddSingleton<ISummaryPath>(fakeSummaryPath))
+                .ConfigureServices(x => x.AddSingleton<IMemoryCache>(inMemoryCache))
+                .UseEnvironment("Development")
+                .UseStartup<Startup>();
+
+            var testHost = new TestServer(webHostBuilder);
+            var httpClient = testHost.CreateClient();
+            return new FourPointProlog<HttpClient, FakeSummaryPath, FakeArticlePath, FakeInMemoryCache>(httpClient, fakeSummaryPath, fakeArticlePath, inMemoryCache);
         }
 
         private static void InitializeServices(IServiceCollection services)

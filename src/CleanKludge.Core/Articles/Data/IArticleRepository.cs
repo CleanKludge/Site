@@ -2,6 +2,8 @@
 {
     public interface IArticleRepository
     {
-        IArticleDto FetchOne(ArticleIdentifier identifier);
+        IArticleDto FetchOne(IArticleSummaryDto summary);
+        void Reload(IArticleSummaryDto summary);
+        void Remove(ArticleIdentifier identifier);
     }
 }

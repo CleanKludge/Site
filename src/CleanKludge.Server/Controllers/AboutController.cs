@@ -8,6 +8,7 @@ namespace CleanKludge.Server.Controllers
     [Route("about")]
     [AllowAnonymous]
     [DynamicLocation(Location.About)]
+    [ResponseCache(CacheProfileName = "Static")]
     public class AboutController : Controller
     {
         public IActionResult Index()

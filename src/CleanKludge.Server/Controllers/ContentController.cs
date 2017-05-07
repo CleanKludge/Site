@@ -10,6 +10,7 @@ namespace CleanKludge.Server.Controllers
 {
     [DynamicLocation]
     [Route("{location:regex(blog|code)}")]
+    [ResponseCache(CacheProfileName = "Content")]
     public class ContentController : Controller
     {
         private readonly ContentService _contentService;

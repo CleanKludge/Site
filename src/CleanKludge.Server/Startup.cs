@@ -73,12 +73,18 @@ namespace CleanKludge.Server
             else
                 services.AddGitServices(Configuration);
 
-
             services.AddSevices(Configuration);
             services.AddResponseCaching();
             services.AddMvc(options =>
             {
-                options.CacheProfiles.Add("Default", new CacheProfile
+                options.CacheProfiles.Add("Static", new CacheProfile
+                {
+                    Location = ResponseCacheLocation.Any,
+                    NoStore = false,
+                    Duration = 360
+                });
+
+                options.CacheProfiles.Add("Content", new CacheProfile
                 {
                     Location = ResponseCacheLocation.Any,
                     NoStore = false,
@@ -86,7 +92,12 @@ namespace CleanKludge.Server
                     Duration = 60
                 });
                 
-                options.Filters.Add(new ResponseCacheAttribute { CacheProfileName = "Default" });
+                options.CacheProfiles.Add("None", new CacheProfile
+                {
+                    Location = ResponseCacheLocation.None,
+                    NoStore = true
+                });
+                
                 options.Filters.Add(new SiteVersionAttribute(Configuration));
 
                 options.OutputFormatters.Add(new JsonOutputFormatter(new JsonSerializerSettings(), ArrayPool<char>.Shared));

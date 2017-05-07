@@ -5,20 +5,25 @@ using CleanKludge.Core.Articles;
 using CleanKludge.Core.Articles.Data;
 using CleanKludge.Data.File.Serializers;
 using Microsoft.Extensions.Caching.Memory;
+using Serilog;
 
 namespace CleanKludge.Data.File.Articles
 {
     public class ArticleSummaryRepository : IArticleSummaryRepository
     {
+        private readonly IArticleRepository _articleRepository;
         private readonly IMemoryCache _memoryCache;
         private readonly ISummaryPath _summaryPath;
         private readonly ISerializer _serializer;
+        private readonly ILogger _logger;
 
-        public ArticleSummaryRepository(ISummaryPath summaryPath, IMemoryCache memoryCache, ISerializer serializer)
+        public ArticleSummaryRepository(ISummaryPath summaryPath, IMemoryCache memoryCache, ISerializer serializer, IArticleRepository articleRepository, ILogger logger)
         {
             _summaryPath = summaryPath;
             _memoryCache = memoryCache;
             _serializer = serializer;
+            _articleRepository = articleRepository;
+            _logger = logger.ForContext<ArticleSummaryRepository>();
         }
 
         public IArticleSummaryDto FetchOne(ArticleIdentifier identifier)
@@ -47,7 +52,7 @@ namespace CleanKludge.Data.File.Articles
                     _memoryCache.Set(MemoryCacheKey.ForSummary(summaryRecord.Identifier), summaryRecord);
                 }
 
-                if(summaryRecord.Enabled)
+                if (summaryRecord.Enabled)
                     records.Add(summaryRecord);
             }
 
@@ -58,29 +63,30 @@ namespace CleanKludge.Data.File.Articles
 
         public void Clear()
         {
-            var hadSummaries = _memoryCache.TryGetValue(MemoryCacheKey.Summaries(), out IList<IArticleSummaryDto> oldSummaries);
+            _memoryCache.TryGetValue(MemoryCacheKey.Summaries(), out IList<IArticleSummaryDto> oldSummaries);
 
             var newSummaries = new List<IArticleSummaryDto>();
-            foreach (var path in _summaryPath.GetAll())
+            foreach(var path in _summaryPath.GetAll())
             {
                 var summaryRecord = _serializer.Deserialize<ArticleSummaryRecord>(_summaryPath.LoadFrom(path));
+
                 _memoryCache.Set(MemoryCacheKey.ForSummary(summaryRecord.Identifier), summaryRecord);
+                _articleRepository.Reload(summaryRecord);
+                _logger.Information("Reloaded summary '{Summary}'.", summaryRecord.Identifier.ToString());
 
                 if (summaryRecord.Enabled)
                     newSummaries.Add(summaryRecord);
             }
 
             _memoryCache.Set(MemoryCacheKey.Summaries(), newSummaries);
-
-            if(!hadSummaries)
-                return;
-
-            foreach (var oldSummary in oldSummaries)
+            foreach (var oldSummary in oldSummaries ?? new List<IArticleSummaryDto>())
             {
                 if(newSummaries.Any(x => x.Identifier.Equals(oldSummary.Identifier)))
                     continue;
 
                 _memoryCache.Remove(MemoryCacheKey.ForSummary(oldSummary.Identifier));
+                _articleRepository.Remove(oldSummary.Identifier);
+                _logger.Information("Removed summary '{Summary}'.", oldSummary.Identifier.ToString());
             }
         }
     }

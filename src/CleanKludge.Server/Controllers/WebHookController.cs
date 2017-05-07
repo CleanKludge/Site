@@ -13,18 +13,19 @@ namespace CleanKludge.Server.Controllers
 {
     [Route("webhook")]
     [DynamicLocation(Location.Webhook)]
-    public class WebHookController : Controller
+    [ResponseCache(CacheProfileName = "None")]
+    public class WebhookController : Controller
     {
         private readonly ContentService _contentService;
 
-        public WebHookController(ContentService contentService)
+        public WebhookController(ContentService contentService)
         {
             _contentService = contentService;
         }
 
         [HttpPost("content")]
         [TypeFilter(typeof(ValidGitHubRequestAttribute))]
-        public ContentUpdateResponse UpdateContent([FromBody, Required] ContentUpdateRequest request)
+        public ContentUpdateResponse UpdateContent([FromBody] ContentUpdateRequest request)
         {
             var result = _contentService.UpdateAll(GitCredentials.From(request?.PusherRequest?.Email, request?.PusherRequest?.Name));
 

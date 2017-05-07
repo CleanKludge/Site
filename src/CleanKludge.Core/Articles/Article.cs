@@ -8,10 +8,11 @@ namespace CleanKludge.Core.Articles
         private readonly ArticleSummary _summary;
         private readonly string _content;
 
-        public static Article LoadFrom(IArticleRepository repository, ArticleIdentifier articleIdentifier)
+        public static Article LoadFrom(IArticleSummaryRepository articleSummaryRepository, IArticleRepository articleRepository, ArticleIdentifier articleIdentifier)
         {
-            var dto = repository.FetchOne(articleIdentifier);
-            return new Article(dto.Content, ArticleSummary.From(dto.Summary));
+            var summary = articleSummaryRepository.FetchOne(articleIdentifier);
+            var article = articleRepository.FetchOne(summary);
+            return new Article(article.Content, ArticleSummary.From(summary));
         }
 
         private Article(string content, ArticleSummary summary)

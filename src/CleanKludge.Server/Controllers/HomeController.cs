@@ -7,6 +7,7 @@ namespace CleanKludge.Server.Controllers
 {
     [Route("")]
     [DynamicLocation(Location.Home)]
+    [ResponseCache(CacheProfileName = "Content")]
     public class HomeController : Controller
     {
         private readonly ContentService _contentService;

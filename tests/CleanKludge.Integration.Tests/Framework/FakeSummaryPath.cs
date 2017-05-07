@@ -17,7 +17,7 @@ namespace CleanKludge.Integration.Tests.Framework
 
         public IEnumerable<string> GetAll()
         {
-            return Enumerable.Select<ArticleIdentifier, string>(_articles.Keys, x => x.ToString());
+            return _articles.Keys.Select(x => x.ToString());
         }
 
         public string LoadFor(ArticleIdentifier identifier)

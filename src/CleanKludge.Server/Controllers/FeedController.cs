@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CleanKludge.Server.Controllers
 {
     [Route("")]
+    [ResponseCache(CacheProfileName = "None")]
     public class FeedController : Controller
     {
         private readonly ContentService _contentService;

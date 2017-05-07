@@ -5,6 +5,7 @@ using CleanKludge.Data.File.Serializers;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Serilog;
 
 namespace CleanKludge.Data.File.Unit.Tests.GivenAnArticleSummaryRepository.WithASummaryCached
 {
@@ -29,7 +30,7 @@ namespace CleanKludge.Data.File.Unit.Tests.GivenAnArticleSummaryRepository.WithA
             var summaryPath = new Mock<ISummaryPath>();
             summaryPath.Setup(x => x.LoadFor(It.IsAny<ArticleIdentifier>())).Returns("data");
 
-            var subject = new ArticleSummaryRepository(summaryPath.Object, _memoryCache.Object, new Mock<ISerializer>().Object);
+            var subject = new ArticleSummaryRepository(summaryPath.Object, _memoryCache.Object, new Mock<ISerializer>().Object, new Mock<IArticleRepository>().Object, new Mock<ILogger>().Object);
             _result = subject.FetchOne(ArticleIdentifier.From("identifier"));
         }
 
