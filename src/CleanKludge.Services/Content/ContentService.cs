@@ -18,10 +18,14 @@ namespace CleanKludge.Services.Content
             _contentRepository = contentRepository;
         }
 
-        public void UpdateAll(GitCredentials credentials)
+        public PullResult UpdateAll(GitCredentials credentials)
         {
-            _contentRepository.Pull(credentials);
-            _articleSummaryRepository.Clear();
+            var result = _contentRepository.Pull(credentials);
+
+            if(result.State == PullState.Successful)
+                _articleSummaryRepository.Clear();
+
+            return result;
         }
 
         public Article For(ArticleIdentifier reference)

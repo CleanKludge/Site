@@ -2,7 +2,7 @@
 "use strict";
 
 var gulp = require("gulp"),
-    rimraf = require("rimraf"),
+    del = require("del"),
     concat = require("gulp-concat"),
     rename = require("gulp-rename"),
     cssmin = require("gulp-cssmin"),
@@ -12,12 +12,12 @@ var gulp = require("gulp"),
     config = require("./appsettings.json"),
     bundles = config.Bundles;
 
-gulp.task("clean:js", function (cb) {
-    rimraf(bundles.Js.Destination, cb);
+gulp.task("clean:js", function () {
+    return del([bundles.Js.Minified]);
 });
 
-gulp.task("clean:css", function (cb) {
-    rimraf(bundles.Css.Destination, cb);
+gulp.task("clean:css", function () {
+    return del([bundles.Css.Source]);
 });
 
 gulp.task("min:js", function () {

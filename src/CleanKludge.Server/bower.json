@@ -1,13 +1,18 @@
 {
-    "name": "asp.net",
-    "private": true,
-    "dependencies": {
-        "bootstrap": "3.3.6",
-        "jquery": "2.2.0",
-        "jquery-validation": "1.14.0",
-        "jquery-validation-unobtrusive": "3.2.6",
-        "autosize": "3.0.20",
-        "fontawesome": "4.7.0",
-        "prismjs": "1.6.0"
-    }
+  "name": "asp.net",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "v4.0.0-alpha.6",
+    "jquery": "2.2.0",
+    "jquery-validation": "1.16.0",
+    "jquery-validation-unobtrusive": "3.2.6",
+    "autosize": "3.0.20",
+    "fontawesome": "4.7.0",
+    "prismjs": "1.6.0",
+    "gulp": "v3.9.1"
+  },
+  "resolutions": {
+    "jquery-validation": "1.16.0",
+    "bootstrap": "v4.0.0-alpha.6"
+  }
 }

@@ -22,7 +22,19 @@ Teardown(context =>
 });
 
 
+Task("Clean")
+    .Does(() =>
+    {
+        Func<IFileSystemInfo, bool> exclude_node_modules = fileSystemInfo => {
+            return !fileSystemInfo.Path.FullPath.Contains("node_modules");
+        };
+        
+        CleanDirectories("./src/**/bin", exclude_node_modules);
+        CleanDirectories("./src/**/obj", exclude_node_modules);
+    });
+
 Task("Restore")
+    .IsDependentOn("Clean")
     .Does(() =>
     {
         var settings = new DotNetCoreRestoreSettings

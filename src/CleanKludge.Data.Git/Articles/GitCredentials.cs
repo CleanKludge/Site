@@ -41,7 +41,7 @@ namespace CleanKludge.Data.Git.Articles
 
         protected bool Equals(GitCredentials other)
         {
-            return string.Equals(_email, other._email) && string.Equals(_name, other._name);
+            return string.Equals(_email.ToLower(), other._email.ToLower()) && string.Equals(_name.ToLower(), other._name.ToLower());
         }
 
         public override int GetHashCode()
@@ -50,6 +50,11 @@ namespace CleanKludge.Data.Git.Articles
             {
                 return ((_email != null ? _email.GetHashCode() : 0) * 397) ^ (_name != null ? _name.GetHashCode() : 0);
             }
+        }
+
+        public override string ToString()
+        {
+            return $"{{ \"Name\": \"{_name}\", \"Email\":\"{_email}\" }}";
         }
     }
 }

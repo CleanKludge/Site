@@ -32,5 +32,5 @@ docker run -d -p 5080:80 -e "ContentRepositoryUri=https://github.com/CleanKludge
 
 ### Remote
 ```powershell
-docker run -d -p 80:80  -e "ContentRepositoryUri=<value>" -e "GitHubToken=<value>" -e "GitName=<value>" -e "GitEmail=<value>"  --name website cleankludge/website:<tag>
+docker run -d -p 80:80  -e "ContentRepositoryUri=<value>" -e "GitHubToken=<value>" -e "GitName=<value>" -e "GitEmail=<value>" -e "SERVER_URL=http://*:80" -e "MinimumLogLevel=Information" --name website cleankludge/website:<tag>
 ```

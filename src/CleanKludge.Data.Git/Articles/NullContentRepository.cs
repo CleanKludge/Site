@@ -6,8 +6,9 @@
         {
         }
 
-        public void Pull(GitCredentials credentials)
+        public PullResult Pull(GitCredentials credentials)
         {
+            return PullResult.Success("Always succeeds");
         }
     }
 }

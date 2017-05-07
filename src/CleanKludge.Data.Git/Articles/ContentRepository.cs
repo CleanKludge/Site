@@ -4,13 +4,14 @@ using LibGit2Sharp;
 using Microsoft.Extensions.Options;
 using Serilog;
 using CleanKludge.Core.Articles;
+using CleanKludge.Data.Git.Errors;
 
 namespace CleanKludge.Data.Git.Articles
 {
     public interface IContentRepository
     {
         void Clone();
-        void Pull(GitCredentials credentials);
+        PullResult Pull(GitCredentials credentials);
     }
 
     public class ContentRepository : IContentRepository
@@ -52,19 +53,38 @@ namespace CleanKludge.Data.Git.Articles
             }
         }
 
-        public void Pull(GitCredentials credentials)
+        public PullResult Pull(GitCredentials credentials)
         {
-            if(!_credentials.Equals(credentials))
+            try
             {
-                _logger.Error("Invalid credentials supplied for pull {@Credentials}.", credentials);
-                return;
-            }
+                if(!_credentials.Equals(credentials))
+                {
+                    _logger.Error("Invalid credentials supplied for pull {Credsentials}. Wanted {RequiredCredentials}", credentials.ToString(), _credentials.ToString());
+                    return PullResult.Unauthorized("Invalid credentials supplied.");
+                }
 
-            using(var repository = new Repository(_contentPath))
+                using(var repository = new Repository(_contentPath))
+                {
+                    var pullOptions = new PullOptions();
+                    var signature = new Signature(credentials, DateTimeOffset.UtcNow);
+                    var result = Commands.Pull(repository, signature, pullOptions);
+                    _logger.Information("Content updated to {@Result}.", result);
+
+                    switch(result.Status)
+                    {
+                        case MergeStatus.Conflicts:
+                            throw ExceptionBecause.ContentHasConflicts();
+                        case MergeStatus.UpToDate:
+                            return PullResult.Success("Content already up to date.");
+                        default:
+                            return PullResult.Success($"Content updated to commit '{result.Commit?.Id?.Sha ?? "Unknown"}'.");
+                    }
+                }
+            }
+            catch(Exception exception)
             {
-                var pullOptions = new PullOptions();
-                var signature = new Signature(credentials, DateTimeOffset.UtcNow);
-                Commands.Pull(repository, signature, pullOptions);
+                _logger.Error(exception, "Pull attempted failed {@BaseException}", exception.GetBaseException());
+                return PullResult.Failed("Pull attempt failed.");
             }
         }
     }

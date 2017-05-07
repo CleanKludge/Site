@@ -1,52 +1,49 @@
-using System;
+﻿using System;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using CleanKludge.Server.Authorization.Requirements;
+using CleanKludge.Api.Responses.Content;
 using CleanKludge.Server.Extensions;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 using Serilog;
 
-namespace CleanKludge.Server.Authorization.Handlers
+namespace CleanKludge.Server.Authorization.Filters
 {
-    public class ValidGitHubRequestHandler :  AuthorizationHandler<ValidGitHubRequestRequirement>
+    public class ValidGitHubRequestAttribute : Attribute, IAsyncAuthorizationFilter
     {
         private const string AuthenticationType = "sha1=";
         private readonly GitHubOptions _options;
         private readonly ILogger _logger;
 
-        public ValidGitHubRequestHandler(IOptions<GitHubOptions> options, ILogger logger)
+        public ValidGitHubRequestAttribute(IOptions<GitHubOptions> options, ILogger logger)
         {
-            _logger = logger.ForContext<ValidGitHubRequestHandler>();
+            _logger = logger.ForContext<ValidGitHubRequestAttribute>();
             _options = options?.Value ?? new GitHubOptions();
         }
 
-        protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, ValidGitHubRequestRequirement requirement)
+        public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
-            var mvcContext = context.Resource as AuthorizationFilterContext;
+            context.HttpContext.Request.Headers.TryGetValue("X-GitHub-Event", out StringValues eventType);
+            context.HttpContext.Request.Headers.TryGetValue("X-Hub-Signature", out StringValues signature);
+            context.HttpContext.Request.Headers.TryGetValue("X-GitHub-Delivery", out StringValues delivery);
+            var body = await context.HttpContext.Request.ReadAsByteArrayAsync();
 
-            if (mvcContext == null)
+            if (!Validate(signature, eventType, delivery, body, _options.GitHubToken))
             {
-                context.Fail();
-                return;
-            }
+                var contentUpdateResponse = new ContentUpdateResponse
+                {
+                    Successful = false,
+                    Message = "You are not allowed to perfom that action."
+                };
 
-            mvcContext.HttpContext.Request.Headers.TryGetValue("X-GitHub-Event", out StringValues eventType);
-            mvcContext.HttpContext.Request.Headers.TryGetValue("X-Hub-Signature", out StringValues signature);
-            mvcContext.HttpContext.Request.Headers.TryGetValue("X-GitHub-Delivery", out StringValues delivery);
-            var body = await mvcContext.HttpContext.Request.ReadAsByteArrayAsync();
-
-            if(Validate(signature, eventType, delivery, body, _options.GitHubToken))
-                context.Succeed(requirement);
-            else
-            {
-                context.Fail();
-                mvcContext.Result = new UnauthorizedResult();
+                context.Result = new  JsonResult(contentUpdateResponse)
+                {
+                    StatusCode = (int)HttpStatusCode.Forbidden
+                };
             }
         }
 
@@ -73,7 +70,7 @@ namespace CleanKludge.Server.Authorization.Handlers
                     return hashString.CryptographicEquals(signatureData);
                 }
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 _logger.Error(exception, "Failed to validate {Signature} for {EventType} with {Token} on {Body}", signature, eventType, token, body);
                 return false;

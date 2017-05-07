@@ -6,18 +6,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="1.1.14" />
-    <PackageReference Include="MSTest.TestFramework" Version="1.1.14" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.1.17" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.1.17" />
+    <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\CleanKludge.Core\CleanKludge.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System.Xml.XmlSerializer">
-      <HintPath>C:\Users\Korthax\.nuget\packages\system.xml.xmlserializer\4.0.11\ref\netstandard1.3\System.Xml.XmlSerializer.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>

@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using CleanKludge.Api.Requests.Content;
 using CleanKludge.Api.Responses.Articles;
+using CleanKludge.Api.Responses.Content;
 using CleanKludge.Data.Git.Articles;
-using CleanKludge.Server.Authorization;
+using CleanKludge.Server.Authorization.Filters;
+using CleanKludge.Server.Extensions;
 using CleanKludge.Server.Filters;
 using CleanKludge.Services.Content;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanKludge.Server.Controllers
@@ -22,10 +23,13 @@ namespace CleanKludge.Server.Controllers
         }
 
         [HttpPost("content")]
-        [Authorize(Policy = Policies.ValidGitHubRequest)]
-        public void UpdateContent([FromBody, Required] ContentUpdateRequest request)
+        [TypeFilter(typeof(ValidGitHubRequestAttribute))]
+        public ContentUpdateResponse UpdateContent([FromBody, Required] ContentUpdateRequest request)
         {
-            _contentService.UpdateAll(GitCredentials.From(request?.PusherRequest?.Name, request?.PusherRequest?.Email));
+            var result = _contentService.UpdateAll(GitCredentials.From(request?.PusherRequest?.Email, request?.PusherRequest?.Name));
+
+            Response.StatusCode = (int)result.State.ToStatusCode();
+            return result.ToResponse();
         }
     }
 }

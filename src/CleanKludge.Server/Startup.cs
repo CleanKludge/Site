@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Xml;
 using CleanKludge.Core.Modules;
@@ -18,6 +19,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Json;
@@ -87,6 +89,7 @@ namespace CleanKludge.Server
                 options.Filters.Add(new ResponseCacheAttribute { CacheProfileName = "Default" });
                 options.Filters.Add(new SiteVersionAttribute(Configuration));
 
+                options.OutputFormatters.Add(new JsonOutputFormatter(new JsonSerializerSettings(), ArrayPool<char>.Shared));
                 options.OutputFormatters.Add(new XmlSerializerOutputFormatter(new XmlWriterSettings { NamespaceHandling = NamespaceHandling.OmitDuplicates }));
             });
 
@@ -106,13 +109,6 @@ namespace CleanKludge.Server
             }
 
             applicationBuilder.LoadContent();
-            applicationBuilder.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AutomaticChallenge = true,
-                AutomaticAuthenticate = false,
-                LoginPath = new PathString("/error/403/"),
-                AccessDeniedPath = new PathString("/error/403/")
-            });
             applicationBuilder.UseResponseCaching();
             applicationBuilder.UseStatusCodePagesWithRedirects("/error/{0}");
             applicationBuilder.UseStaticFiles();
